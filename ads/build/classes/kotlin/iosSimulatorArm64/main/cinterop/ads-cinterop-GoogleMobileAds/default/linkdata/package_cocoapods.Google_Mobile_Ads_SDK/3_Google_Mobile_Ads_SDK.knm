@@ -1,0 +1,638 @@
+
+—G
+kotlin
+Double
+platform
+CoreGraphics
+CGFloat
+width
+kotlinx
+cinterop
+CValue
+	cocoapods
+Google_Mobile_Ads_SDK
+	GADAdSize
+internal
+CCall
+id
+Zknifunptr_cocoapods_Google_Mobile_Ads_SDK43_GADPortraitInlineAdaptiveBannerAdSizeWithWidth
+ExperimentalForeignApi
+.GADPortraitInlineAdaptiveBannerAdSizeWithWidth
+[knifunptr_cocoapods_Google_Mobile_Ads_SDK44_GADLandscapeInlineAdaptiveBannerAdSizeWithWidth
+/GADLandscapeInlineAdaptiveBannerAdSizeWithWidth
+dknifunptr_cocoapods_Google_Mobile_Ads_SDK45_GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth
+8GADCurrentOrientationInlineAdaptiveBannerAdSizeWithWidth
+	maxHeight
+^knifunptr_cocoapods_Google_Mobile_Ads_SDK46_GADInlineAdaptiveBannerAdSizeWithWidthAndMaxHeight
+2GADInlineAdaptiveBannerAdSizeWithWidthAndMaxHeight
+\knifunptr_cocoapods_Google_Mobile_Ads_SDK47_GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth
+0GADPortraitAnchoredAdaptiveBannerAdSizeWithWidth
+]knifunptr_cocoapods_Google_Mobile_Ads_SDK48_GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth
+1GADLandscapeAnchoredAdaptiveBannerAdSizeWithWidth
+fknifunptr_cocoapods_Google_Mobile_Ads_SDK49_GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth
+:GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth
+CGSize
+size
+?knifunptr_cocoapods_Google_Mobile_Ads_SDK50_GADAdSizeFromCGSize
+GADAdSizeFromCGSize
+height
+Pknifunptr_cocoapods_Google_Mobile_Ads_SDK51_GADAdSizeFullWidthPortraitWithHeight
+$GADAdSizeFullWidthPortraitWithHeight
+Qknifunptr_cocoapods_Google_Mobile_Ads_SDK52_GADAdSizeFullWidthLandscapeWithHeight
+%GADAdSizeFullWidthLandscapeWithHeight
+size1
+size2
+Boolean
+@knifunptr_cocoapods_Google_Mobile_Ads_SDK53_GADAdSizeEqualToSize
+GADAdSizeEqualToSize
+?knifunptr_cocoapods_Google_Mobile_Ads_SDK54_CGSizeFromGADAdSize
+CGSizeFromGADAdSize
+<knifunptr_cocoapods_Google_Mobile_Ads_SDK55_IsGADAdSizeValid
+IsGADAdSizeValid
+<knifunptr_cocoapods_Google_Mobile_Ads_SDK56_GADAdSizeIsFluid
+GADAdSizeIsFluid
+String
+Aknifunptr_cocoapods_Google_Mobile_Ads_SDK57_NSStringFromGADAdSize
+NSStringFromGADAdSize
+
+Foundation
+NSValue
+@knifunptr_cocoapods_Google_Mobile_Ads_SDK58_NSValueFromGADAdSize
+NSValueFromGADAdSize
+value
+@knifunptr_cocoapods_Google_Mobile_Ads_SDK59_GADAdSizeFromNSValue
+GADAdSizeFromNSValue
+GADVersionNumber
+version
+Iknifunptr_cocoapods_Google_Mobile_Ads_SDK60_GADGetStringFromVersionNumber
+GADGetStringFromVersionNumber
+original
+collections
+List
+possibleAdSizes
+Iknifunptr_cocoapods_Google_Mobile_Ads_SDK61_GADClosestValidSizeForAdSizes
+GADClosestValidSizeForAdSizes
+GADMediaContent
+UIKit
+UIImage
+
+ObjCMethod
+selector
+	mainImage
+encoding
+@16@0:8
+isStret
+Unit
+setMainImage:
+
+v24@0:8@16
+setMainImage
+GADNativeAd
+UIView
+view
+registerClickConfirmingView:
+registerClickConfirmingView
+cancelUnconfirmedClick
+v16@0:8
++GADNativeAdUnconfirmedClickDelegateProtocol
+unconfirmedClickDelegate
+setUnconfirmedClickDelegate:
+setUnconfirmedClickDelegate
+enableCustomClickGestures
+recordCustomClickGesture
+isCustomClickGestureEnabled
+B16@0:8
+GADNativeAdImage
+image
+
+Deprecated
+message
+Use factory method instead
+replaceWith
+ReplaceWith
+imports
+
+expression
+GADNativeAdImage.create(image)
+level
+DeprecationLevel
+ERROR
+initWithImage:
+
+@24@0:8@16
+ConsumesReceiver
+ReturnsRetained
+initWithImage
+T
+ObjCClassOf
+ObjCFactory
+create
+NSURL
+URL
+scale
+#GADNativeAdImage.create(URL, scale)
+initWithURL:scale:
+@32@0:8@16d24
+initWithURL
+uRL
+
+GADRequest
+adString
+setAdString:
+setAdString
+GADAdLoaderAdType
+Pknifunptr_cocoapods_Google_Mobile_Ads_SDK62_GADAdLoaderAdTypeCustomNative_getter
+GADAdLoaderAdTypeCustomNative
+Mknifunptr_cocoapods_Google_Mobile_Ads_SDK64_GADAdLoaderAdTypeGAMBanner_getter
+GADAdLoaderAdTypeGAMBanner
+Jknifunptr_cocoapods_Google_Mobile_Ads_SDK66_GADAdLoaderAdTypeNative_getter
+GADAdLoaderAdTypeNative
+Bknifunptr_cocoapods_Google_Mobile_Ads_SDK68_GADAdSizeBanner_getter
+GADAdSizeBanner
+Aknifunptr_cocoapods_Google_Mobile_Ads_SDK69_GADAdSizeFluid_getter
+GADAdSizeFluid
+Fknifunptr_cocoapods_Google_Mobile_Ads_SDK70_GADAdSizeFullBanner_getter
+GADAdSizeFullBanner
+Cknifunptr_cocoapods_Google_Mobile_Ads_SDK71_GADAdSizeInvalid_getter
+GADAdSizeInvalid
+Gknifunptr_cocoapods_Google_Mobile_Ads_SDK72_GADAdSizeLargeBanner_getter
+GADAdSizeLargeBanner
+Gknifunptr_cocoapods_Google_Mobile_Ads_SDK73_GADAdSizeLeaderboard_getter
+GADAdSizeLeaderboard
+Kknifunptr_cocoapods_Google_Mobile_Ads_SDK74_GADAdSizeMediumRectangle_getter
+GADAdSizeMediumRectangle
+Fknifunptr_cocoapods_Google_Mobile_Ads_SDK75_GADAdSizeSkyscraper_getter
+GADAdSizeSkyscraper
+Sknifunptr_cocoapods_Google_Mobile_Ads_SDK76_GADCustomEventAdNetworkClassName_getter
+ GADCustomEventAdNetworkClassName
+Qknifunptr_cocoapods_Google_Mobile_Ads_SDK77_GADCustomEventParametersServer_getter
+GADCustomEventParametersServer
+Pknifunptr_cocoapods_Google_Mobile_Ads_SDK78_GADCustomNativeAdMediaViewKey_getter
+GADCustomNativeAdMediaViewKey
+Aknifunptr_cocoapods_Google_Mobile_Ads_SDK79_GADErrorDomain_getter
+GADErrorDomain
+Rknifunptr_cocoapods_Google_Mobile_Ads_SDK80_GADErrorUserInfoKeyResponseInfo_getter
+Rknifunptr_cocoapods_Google_Mobile_Ads_SDK81_GADErrorUserInfoKeyResponseInfo_setter
+GADErrorUserInfoKeyResponseInfo
+Nknifunptr_cocoapods_Google_Mobile_Ads_SDK82_GADGoogleAdNetworkClassName_getter
+GADGoogleAdNetworkClassName
+GADMaxAdContentRating
+Oknifunptr_cocoapods_Google_Mobile_Ads_SDK83_GADMaxAdContentRatingGeneral_getter
+GADMaxAdContentRatingGeneral
+Vknifunptr_cocoapods_Google_Mobile_Ads_SDK85_GADMaxAdContentRatingMatureAudience_getter
+#GADMaxAdContentRatingMatureAudience
+Xknifunptr_cocoapods_Google_Mobile_Ads_SDK87_GADMaxAdContentRatingParentalGuidance_getter
+%GADMaxAdContentRatingParentalGuidance
+Lknifunptr_cocoapods_Google_Mobile_Ads_SDK89_GADMaxAdContentRatingTeen_getter
+GADMaxAdContentRatingTeen
+GADNativeAssetIdentifier
+Nknifunptr_cocoapods_Google_Mobile_Ads_SDK91_GADNativeAdChoicesViewAsset_getter
+GADNativeAdChoicesViewAsset
+Kknifunptr_cocoapods_Google_Mobile_Ads_SDK93_GADNativeAdvertiserAsset_getter
+GADNativeAdvertiserAsset
+Eknifunptr_cocoapods_Google_Mobile_Ads_SDK95_GADNativeBodyAsset_getter
+GADNativeBodyAsset
+Mknifunptr_cocoapods_Google_Mobile_Ads_SDK97_GADNativeCallToActionAsset_getter
+GADNativeCallToActionAsset
+Iknifunptr_cocoapods_Google_Mobile_Ads_SDK99_GADNativeHeadlineAsset_getter
+GADNativeHeadlineAsset
+Fknifunptr_cocoapods_Google_Mobile_Ads_SDK101_GADNativeIconAsset_getter
+GADNativeIconAsset
+Gknifunptr_cocoapods_Google_Mobile_Ads_SDK103_GADNativeImageAsset_getter
+GADNativeImageAsset
+Kknifunptr_cocoapods_Google_Mobile_Ads_SDK105_GADNativeMediaViewAsset_getter
+GADNativeMediaViewAsset
+Gknifunptr_cocoapods_Google_Mobile_Ads_SDK107_GADNativePriceAsset_getter
+GADNativePriceAsset
+Lknifunptr_cocoapods_Google_Mobile_Ads_SDK109_GADNativeStarRatingAsset_getter
+GADNativeStarRatingAsset
+Gknifunptr_cocoapods_Google_Mobile_Ads_SDK111_GADNativeStoreAsset_getter
+GADNativeStoreAsset
+Bknifunptr_cocoapods_Google_Mobile_Ads_SDK113_GADSimulatorID_getter
+GADSimulatorID
+CPointer
+
+UByteVarOf
+UByte
+UByteVar
+CArrayPointer
+Pknifunptr_cocoapods_Google_Mobile_Ads_SDK114_GoogleMobileAdsVersionString_getter
+GoogleMobileAdsVersionString
+Rknifunptr_cocoapods_Google_Mobile_Ads_SDK115_kGADAdSizeSmartBannerLandscape_getter
+kGADAdSizeSmartBannerLandscape
+Qknifunptr_cocoapods_Google_Mobile_Ads_SDK116_kGADAdSizeSmartBannerPortrait_getter
+kGADAdSizeSmartBannerPortrait
+GADMAdapter
+GADMAdapterClassNamePrefix
+customClickGestureEnabled
+Long
+GADAdFormat
+GADAdFormatBanner
+GADAdFormatInterstitial
+GADAdFormatRewarded
+GADAdFormatNative
+GADAdFormatRewardedInterstitial
+GADAdFormatUnknown
+GADAdFormatAppOpen
+GADAdValuePrecision
+GADAdValuePrecisionUnknown
+GADAdValuePrecisionEstimated
+$GADAdValuePrecisionPublisherProvided
+GADAdValuePrecisionPrecise
+GADAdapterInitializationState
+%GADAdapterInitializationStateNotReady
+"GADAdapterInitializationStateReady
+GADMediaAspectRatio
+GADMediaAspectRatioUnknown
+GADMediaAspectRatioAny
+GADMediaAspectRatioLandscape
+GADMediaAspectRatioPortrait
+GADMediaAspectRatioSquare
+'GADPublisherPrivacyPersonalizationState
+.GADPublisherPrivacyPersonalizationStateDefault
+.GADPublisherPrivacyPersonalizationStateEnabled
+/GADPublisherPrivacyPersonalizationStateDisabled
+GADPresentationErrorCode
+"GADPresentationErrorCodeAdNotReady
+"GADPresentationErrorCodeAdTooLarge
+ GADPresentationErrorCodeInternal
+%GADPresentationErrorCodeAdAlreadyUsed
+!GADPresentationErrorNotMainThread
+GADPresentationErrorMediation
+GADErrorCode
+GADErrorInvalidRequest
+GADErrorNoFill
+GADErrorNetworkError
+GADErrorServerError
+GADErrorOSVersionTooLow
+GADErrorTimeout
+GADErrorMediationDataError
+GADErrorMediationAdapterError
+GADErrorMediationInvalidAdSize
+GADErrorInternalError
+GADErrorInvalidArgument
+GADErrorReceivedInvalidResponse
+GADErrorMediationNoFill
+GADErrorAdAlreadyUsed
+$GADErrorApplicationIdentifierMissing
+GADMBannerAnimationType
+GADMBannerAnimationTypeNone
+#GADMBannerAnimationTypeFlipFromLeft
+$GADMBannerAnimationTypeFlipFromRight
+GADMBannerAnimationTypeCurlUp
+GADMBannerAnimationTypeCurlDown
+$GADMBannerAnimationTypeSlideFromLeft
+%GADMBannerAnimationTypeSlideFromRight
+GADMBannerAnimationTypeFadeIn
+GADMBannerAnimationTypeRandomº
+ 
+  
+
+
+ 
+
+
+ 
+	
+
+
+	 
+
+ 
+ 
+ 
+ * 
+ 3 
+6
+7 
+	= 
+ B
+C 
+	G 
+H
+I 
+J 
+ P 
+	T 
+U 
+	[ 
+	c 
+ e 
+ i 
+ n 
+r 
+s 
+v 
+w 
+y 
+	Å 
+	Ö 
+	© 
+	≤ 
+À 
+Ã 
+ Õ 
+Œ 
+œ 
+ Ÿ 
+	⁄ 
+	‚ 
+	Á 
+	Í 
+	 
+	Ù 
+	˚ 
+	ã ç+/0
+02
+0j`Há “
+(“
+/0
+02
+0j`Há “
+(“
+/0
+02
+0j`Há “
+(“
+;0
+02
+0j`2
+0j`Há “
+(“
+/0
+02
+0j`Há “
+(“
+/0
+02
+0j`Há “
+(“
+/0
+02
+0j`Há “
+(“
+1"0
+02 00Há “
+(!“
+/%0
+02
+#0j`Há “
+($“
+/'0
+02
+#0j`Há “
+(&“
+9,02(0
+02)0
+0Há “
+(+“
+1.002 0
+0Há “
+(-“
++002 0
+0Há “
+(/“
++202 0
+0Há “
+(1“
++502 0
+0Há “
+(4“
++902 0
+0Há “
+(8“
++<0
+02:0Há “
+(;“
++@02>00Há “
+(?“
+=F0
+02A0
+02
+D0Há “
+(E“
+7L0*0Há “
+ K(LM(NO “
+?S0*02L0Há “
+ K(QM(RO “
+?X0*02V0Há “
+ K(WM(RO “
+5Y0*0Há “
+ K(YM(ZO “
+7\0*0Há “
+ K(\M(NO “
+?^0*02\0Há “
+ K(]M(RO “
+5_0*0Há “
+ K(_M(ZO “
+5`0*0Há “
+ K(`M(ZO “
+5a0*0Há “
+ K(aM(bO “
+Ät0*02d0Há “
+6f(ghB jk(l
+m
+0!8o“
+ K(pM(qO “
+"“
+#“
+Wx8 " u*0*8 0$2d0Há “
+ %K(pM(qO “
+"“
+#“
+å0*02z0&2
+{0j`Há “
+6f(ghB jk(|
+m
+0!8o“
+ K(}M(~O “
+"“
+#“
+dx8"u*0*80$2Ä0&2
+{0j`Há “
+ %K(}M(~O “
+"“
+#“
+9Ç0*0'Há “
+!	K(ÇM(NO “
+BÑ0*0'2	Ç0Há “
+!	K(ÉM(RO “
+"*á
+0j`(8«Xá“
+ä	(Ü"*â
+0j`(8«Xá“
+ä	(à"*ã
+0j`(8«Xá“
+ä	(ä""ç0
+8«Xá“
+ä	(å""è0
+8«Xá“
+ä	(é""ë0
+8«Xá“
+ä	(ê""ì0
+8«Xá“
+ä	(í""ï0
+8«Xá“
+ä	(î""ó0
+8«Xá“
+ä	(ñ""ô0
+8«Xá“
+ä	(ò""õ0
+8«Xá“
+ä	(ö""ù08«Xá“
+ä	(ú""ü08«Xá“
+ä	(û""°08«Xá“
+ä	(†""£08«Xá“
+ä	(¢"=¶02:08«@«Xá“
+ä	(§í	(•""®08«Xá“
+ä	(ß"*´
+0j`)8«Xá“
+ä	(™"*≠
+0j`)8«Xá“
+ä	(¨"*Ø
+0j`)8«Xá“
+ä	(Æ"*±
+0j`)8«Xá“
+ä	(∞"*¥
+0j`*8«Xá“
+ä	(≥"*∂
+0j`*8«Xá“
+ä	(µ"*∏
+0j`*8«Xá“
+ä	(∑"*∫
+0j`*8«Xá“
+ä	(π"*º
+0j`*8«Xá“
+ä	(ª"*æ
+0j`*8«Xá“
+ä	(Ω"*¿
+0j`*8«Xá“
+ä	(ø"*¬
+0j`*8«Xá“
+ä	(¡"*ƒ
+0j`*8«Xá“
+ä	(√"*∆
+0j`*8«Xá“
+ä	(≈"*»
+0j`*8«Xá“
+ä	(«"" 08«Xá“
+ä	(…"F—&0-0,j`.0+j0-0,j`.`/8«Xá“
+ä	(–""”0
+8«Xá“
+ä	(“""’0
+8«Xá“
+ä	(‘"◊08XáT“
+Í
+(÷"jL0*02:08«@«Xá“
+ä K(LM(NO í K(QM(RO "j\0*02:08«@«Xá“
+ä K(\M(NO í K(]M(RO "9ÿ0*08«Xá“
+ä K(aM(bO "mÇ0*0'2:08«@«Xá“
+ä!	K(ÇM(NO í!	K(ÉM(RO "€00j`18XáT“
+Í
+ "‹00j`18XáT“
+Í
+"›00j`18XáT“
+Í
+"ﬁ00j`18XáT“
+Í
+"ﬂ00j`18XáT“
+Í
+"‡00j`18XáT“
+Í
+
+"·00j`18XáT“
+Í
+"„00j`28XáT“
+Í
+ "‰00j`28XáT“
+Í
+"Â00j`28XáT“
+Í
+"Ê00j`28XáT“
+Í
+"Ë00j`38XáT“
+Í
+ "È00j`38XáT“
+Í
+"Î00j`48XáT“
+Í
+ "Ï00j`48XáT“
+Í
+"Ì00j`48XáT“
+Í
+"Ó00j`48XáT“
+Í
+"Ô00j`48XáT“
+Í
+"Ò00j`58XáT“
+Í
+ "Ú00j`58XáT“
+Í
+"Û00j`58XáT“
+Í
+"ı00j`68XáT“
+Í
+"ˆ00j`68XáT“
+Í
+ "˜00j`68XáT“
+Í
+""¯00j`68XáT“
+Í
+$"˘00j`68XáT“
+Í
+*"˙00j`68XáT“
+Í
+,"¸00j`78XáT“
+Í
+ "˝00j`78XáT“
+Í
+"˛00j`78XáT“
+Í
+"ˇ00j`78XáT“
+Í
+"Ä00j`78XáT“
+Í
+"Å00j`78XáT“
+Í
+
+"Ç00j`78XáT“
+Í
+"É00j`78XáT“
+Í
+"Ñ00j`78XáT“
+Í
+"Ö00j`78XáT“
+Í
+"Ü00j`78XáT“
+Í
+"á00j`78XáT“
+Í
+"à00j`78XáT“
+Í
+"â00j`78XáT“
+Í
+&"ä00j`78XáT“
+Í
+("å00j`88XáT“
+Í
+ "ç00j`88XáT“
+Í
+"é00j`88XáT“
+Í
+"è00j`88XáT“
+Í
+"ê00j`88XáT“
+Í
+"ë00j`88XáT“
+Í
+
+"í00j`88XáT“
+Í
+"ì00j`88XáT“
+Í
+"î00j`88XáT“
+Í
+ÿ
+	‡
+ Í
+cocoapods.Google_Mobile_Ads_SDK
