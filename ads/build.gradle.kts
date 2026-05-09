@@ -2,6 +2,7 @@ plugins {
     id("org.jetbrains.kotlin.multiplatform")
     id("com.android.library")
     id("org.jetbrains.kotlin.native.cocoapods")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 kotlin {
@@ -46,6 +47,9 @@ kotlin {
             implementation("com.google.android.gms:play-services-ads:24.4.0")
             implementation("com.google.android.ump:user-messaging-platform:3.2.0")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
+            implementation("androidx.compose.ui:ui:1.7.8")
+            implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")
+            implementation("androidx.lifecycle:lifecycle-process:2.8.7")
         }
         iosMain.dependencies {}
         commonTest.dependencies {
@@ -56,9 +60,12 @@ kotlin {
 
 android {
     namespace = "kr.co.juooy.ads"
-    compileSdk = 35
+    compileSdk = 36
     defaultConfig {
         minSdk = 26
+    }
+    buildFeatures {
+        compose = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17

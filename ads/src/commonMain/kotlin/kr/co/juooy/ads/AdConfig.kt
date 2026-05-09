@@ -7,6 +7,7 @@ data class AdConfig(
     val rewardedAdUnitId: String,
     val nativeAdUnitId: String,
     val exitAdUnitId: String,
+    val openAdUnitId: String = "",
     val isTestMode: Boolean = false
 ) {
     init {
