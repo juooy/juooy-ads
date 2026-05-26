@@ -1,3 +1,0 @@
-language = Objective-C
-modules = GoogleMobileAds
-linkerOpts = -framework GoogleMobileAds

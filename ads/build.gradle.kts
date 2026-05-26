@@ -5,12 +5,16 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+composeCompiler {
+    targetKotlinPlatforms.set(
+        setOf(org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType.androidJvm)
+    )
+}
+
 kotlin {
     androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "17"
-            }
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
         }
     }
 
@@ -55,6 +59,12 @@ kotlin {
         commonTest.dependencies {
             implementation(kotlin("test"))
         }
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(kotlin("test-junit"))
+                implementation("junit:junit:4.13.2")
+            }
+        }
     }
 }
 
@@ -70,5 +80,16 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+// iOS 관련 태스크는 BUILD_IOS=true 환경변수가 설정된 경우에만 실행
+if (System.getenv("BUILD_IOS") != "true") {
+    tasks.configureEach {
+        if (name.startsWith("pod") || name.startsWith("cinterop") ||
+            name.contains("Ios") || name.contains("IosSimulator")
+        ) {
+            enabled = false
+        }
     }
 }
