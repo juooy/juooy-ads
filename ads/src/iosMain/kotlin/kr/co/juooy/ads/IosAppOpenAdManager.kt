@@ -26,10 +26,10 @@ private const val AD_EXPIRY_MS = 4L * 60L * 60L * 1000L // 4 hours in ms
 class IosAppOpenAdManager(
     private val adManager: IosAdManager
 ) {
-    private var appOpenAd: GADAppOpenAd? = null
-    internal var loadTimeMs: Long = 0L
-    private var isShowingAd = false
-    private var isLoadingAd = false
+    @Volatile private var appOpenAd: GADAppOpenAd? = null
+    @Volatile internal var loadTimeMs: Long = 0L
+    @Volatile private var isShowingAd = false
+    @Volatile private var isLoadingAd = false
 
     var isAdSuppressed: Boolean = false
 
@@ -95,7 +95,7 @@ class IosAppOpenAdManager(
         return (now - loadTimeMs) < AD_EXPIRY_MS
     }
 
-    private fun currentTimeMs(): Long = platform.posix.time(null) * 1000L // seconds → ms
+    private fun currentTimeMs(): Long = platform.posix.time(null).toLong() * 1000L // seconds → ms
 }
 
 private class AppOpenDelegate(

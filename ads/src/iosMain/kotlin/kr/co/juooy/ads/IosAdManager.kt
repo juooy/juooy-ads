@@ -30,6 +30,7 @@ class IosAdManager : AdManager {
 
     private var preloadedInterstitial: GADInterstitialAd? = null
     private var preloadedRewarded: GADRewardedAd? = null
+    @Volatile private var isShowingFullScreen = false
 
     private val activeNativeLoaders = mutableListOf<GADAdLoader>()
 
@@ -144,14 +145,18 @@ class IosAdManager : AdManager {
 
     // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
     override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
+        if (isShowingFullScreen) return false
         val ad = preloadedInterstitial ?: return false
+        isShowingFullScreen = true
         val delegate = InterstitialDelegate(
             onDismissed = {
+                isShowingFullScreen = false
                 preloadedInterstitial = null
                 preloadInterstitial()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
+                isShowingFullScreen = false
                 listener?.onAdFailed(error)
                 onDismissed?.invoke()
             }
@@ -188,14 +193,20 @@ class IosAdManager : AdManager {
         onUserEarnedReward: (amount: Int, type: String) -> Unit,
         onDismissed: (() -> Unit)?
     ): Boolean {
+        if (isShowingFullScreen) return false
         val ad = preloadedRewarded ?: return false
+        isShowingFullScreen = true
         val delegate = RewardedDelegate(
             onDismissed = {
+                isShowingFullScreen = false
                 preloadedRewarded = null
                 preloadRewarded()
                 onDismissed?.invoke()
             },
-            onFailed = { error -> listener?.onAdFailed(error) }
+            onFailed = { error ->
+                isShowingFullScreen = false
+                listener?.onAdFailed(error)
+            }
         )
         ad.fullScreenContentDelegate = delegate
         val reward = ad.adReward

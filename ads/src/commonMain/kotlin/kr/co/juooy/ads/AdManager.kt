@@ -22,10 +22,7 @@ interface AdManager {
         onFailed: ((AdError) -> Unit)? = null
     ) {}
 
-    @Deprecated(
-        message = "Use initializeWithPlatformContext instead.",
-        replaceWith = ReplaceWith("initializeWithPlatformContext(context as PlatformContext, onReady)")
-    )
+    @Deprecated(message = "Use initializeWithPlatformContext instead.")
     fun initializeWithContext(context: Any, onReady: (() -> Unit)? = null) {}
 }
 
