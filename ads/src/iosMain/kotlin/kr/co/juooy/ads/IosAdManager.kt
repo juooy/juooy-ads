@@ -214,7 +214,10 @@ class IosAdManager : AdManager {
 
     @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
     override fun initializeWithContext(context: Any, onReady: (() -> Unit)?) {
-        val vc = context as? UIViewController ?: return
+        val vc = context as? UIViewController ?: run {
+            println("[$TAG] initializeWithContext: expected UIViewController, got ${context::class}")
+            return
+        }
         initializeWithViewController(vc, onReady = onReady)
     }
 }

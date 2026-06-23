@@ -227,7 +227,10 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
     override fun initializeWithContext(context: Any, onReady: (() -> Unit)?) {
-        val activity = context as? Activity ?: return
+        val activity = context as? Activity ?: run {
+            Log.w(TAG, "initializeWithContext: expected Activity, got ${context::class}")
+            return
+        }
         initializeWithActivity(activity, onReady = onReady)
     }
 }

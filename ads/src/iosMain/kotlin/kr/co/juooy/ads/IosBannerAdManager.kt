@@ -29,7 +29,7 @@ class IosBannerAdManager(private val adManager: IosAdManager) {
         viewController: UIViewController,
         adUnitId: String = adManager.config?.bannerAdUnitId ?: "",
         onLoaded: (() -> Unit)? = null,
-        onFailed: ((NSError) -> Unit)? = null
+        onFailed: ((AdError) -> Unit)? = null
     ): GADBannerView {
         val bannerView = GADBannerView()
         bannerView.adUnitID = adUnitId
@@ -42,7 +42,7 @@ class IosBannerAdManager(private val adManager: IosAdManager) {
 
 private class BannerDelegate(
     private val onLoaded: (() -> Unit)?,
-    private val onFailed: ((NSError) -> Unit)?
+    private val onFailed: ((AdError) -> Unit)?
 ) : NSObject(), GADBannerViewDelegateProtocol {
 
     override fun bannerViewDidReceiveAd(bannerView: GADBannerView) {
@@ -50,6 +50,6 @@ private class BannerDelegate(
     }
 
     override fun bannerView(bannerView: GADBannerView, didFailToReceiveAdWithError: NSError) {
-        onFailed?.invoke(didFailToReceiveAdWithError)
+        onFailed?.invoke(AdError(didFailToReceiveAdWithError.code.toInt(), didFailToReceiveAdWithError.localizedDescription, AdType.BANNER))
     }
 }

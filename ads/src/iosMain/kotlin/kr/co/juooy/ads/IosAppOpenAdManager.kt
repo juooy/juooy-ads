@@ -11,6 +11,7 @@ import platform.UIKit.UIViewController
 import platform.darwin.NSObject
 
 private const val TAG = "IosAppOpenAdManager"
+// Keep in sync with Android AppOpenAdManager.AD_EXPIRY_MS
 private const val AD_EXPIRY_MS = 4L * 60L * 60L * 1000L // 4 hours in ms
 
 /**
@@ -77,7 +78,9 @@ class IosAppOpenAdManager(
                 onDismissed?.invoke()
             },
             onFailed = {
+                appOpenAd = null
                 isShowingAd = false
+                loadAd()
                 println("[$TAG] App open ad failed to show: ${it.localizedDescription}")
             }
         )
@@ -92,7 +95,7 @@ class IosAppOpenAdManager(
         return (now - loadTimeMs) < AD_EXPIRY_MS
     }
 
-    private fun currentTimeMs(): Long = platform.posix.time(null) * 1000L
+    private fun currentTimeMs(): Long = platform.posix.time(null) * 1000L // seconds → ms
 }
 
 private class AppOpenDelegate(
