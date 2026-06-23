@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 - `IosConsentStrategy` interface with `AttIosConsentStrategy` (ATT prompt) and `NoOpIosConsentStrategy` (for testing)
 - `AdType.APP_OPEN` enum value for App Open Ad event tracking
 - `AppOpenAdManager.onAdShown` callback (Android) — fires after the ad is confirmed displayed
-- Gradle wrapper and `libs.versions.toml` version catalog
+- Gradle wrapper and `libs.versions.toml` version catalog — consumers can now build without a pre-installed Gradle
 
 ### Changed
 - `AdManager` interface: `showInterstitial`, `showRewarded`, `loadNativeAd`, `initializeWithPlatformContext` now accept `PlatformContext` instead of `Any`
@@ -28,5 +28,5 @@ All notable changes to this project will be documented in this file.
 - `IosBannerAdManager.onFailed` callback now delivers `AdError` instead of platform-specific `NSError`
 - `AndroidAdManager.showInterstitial`/`showRewarded` check `activity.isFinishing || activity.isDestroyed` before showing
 - `AppOpenAdManager.showAdIfAvailable` checks `activity.isFinishing || activity.isDestroyed` before showing
-- Build configuration updated for AGP 9.x compatibility
-- Deprecated `initializeWithContext(Any)` bridge logs a warning on type mismatch instead of silently returning
+- Build is now compatible with AGP 9.x — upgrade your Android Gradle Plugin without breakage
+- Deprecated `initializeWithContext(Any)` bridge now logs a warning on type mismatch instead of silently returning (was a silent swallow, making integration bugs hard to diagnose)

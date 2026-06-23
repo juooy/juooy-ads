@@ -1,5 +1,7 @@
 # 프로젝트 개요
 
+> **API 레퍼런스**: [`LIBRARY_REFERENCE.md`](./LIBRARY_REFERENCE.md) — 전체 공개 API, Android/iOS 코드 예제, ConsentStrategy 교체 방법 포함
+
 ## 3-Agent 팀 구조
 1. 아키텍트(Architect) : 전체 시스템을 이해하고 상세한 작업 계획(브리프)만 세웁니다.
 2. 빌더(Builder) : 아키텍트의 브리프에 있는 내용만 정확히 구현하며, 전체 코드를 뒤지지 않습니다.

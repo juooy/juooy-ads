@@ -142,6 +142,9 @@ adManager.showRewarded(
 val appOpenManager = AppOpenAdManager(adManager)
 appOpenManager.currentActivity = this
 
+// 광고 노출 후 콜백 (선택)
+appOpenManager.onAdShown = { /* 광고가 화면에 표시된 직후 실행 */ }
+
 // ProcessLifecycleOwner에 등록 → 포그라운드 진입 시 자동 노출
 ProcessLifecycleOwner.get().lifecycle.addObserver(appOpenManager)
 
