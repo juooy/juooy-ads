@@ -8,25 +8,32 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.appopen.AppOpenAd
+import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicBoolean
 
 private const val TAG = "AppOpenAdManager"
-private const val AD_EXPIRY_MS = 4 * 60 * 60 * 1000L // 4 hours
+internal const val AD_EXPIRY_MS = 4 * 60 * 60 * 1000L // 4 hours
 
 class AppOpenAdManager(
     private val adManager: AndroidAdManager,
 ) : DefaultLifecycleObserver {
 
     private var appOpenAd: AppOpenAd? = null
-    private var loadTime: Long = 0L
+    internal var loadTime: Long = 0L
     private val isShowingAd = AtomicBoolean(false)
     private val isLoadingAd = AtomicBoolean(false)
 
-    // Injected by the host so AppOpenAdManager never holds an Activity reference.
-    var currentActivity: Activity? = null
+    private var _currentActivity: WeakReference<Activity>? = null
 
-    // Host sets this to true during prayer sessions to suppress the ad.
+    var currentActivity: Activity?
+        get() = _currentActivity?.get()
+        set(value) { _currentActivity = if (value != null) WeakReference(value) else null }
+
+    // Host sets this to true during sessions where ads should be suppressed.
     var isAdSuppressed: Boolean = false
+
+    // Called after the SDK confirms the ad was actually displayed.
+    var onAdShown: (() -> Unit)? = null
 
     fun loadAd(activity: Activity, adUnitId: String) {
         if (adUnitId.isBlank()) return
@@ -52,7 +59,6 @@ class AppOpenAdManager(
         )
     }
 
-    // Called by ProcessLifecycleOwner when the app comes to foreground.
     override fun onStart(owner: LifecycleOwner) {
         if (isAdSuppressed) return
         showAdIfAvailable()
@@ -66,9 +72,14 @@ class AppOpenAdManager(
             return
         }
         val activity = currentActivity ?: return
+        if (activity.isFinishing || activity.isDestroyed) return
         val ad = appOpenAd ?: return
 
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdShowedFullScreenContent() {
+                onAdShown?.invoke()
+            }
+
             override fun onAdDismissedFullScreenContent() {
                 appOpenAd = null
                 isShowingAd.set(false)
@@ -86,9 +97,8 @@ class AppOpenAdManager(
         ad.show(activity)
     }
 
-    private fun isAdAvailable(): Boolean {
+    internal fun isAdAvailable(now: Long = System.currentTimeMillis()): Boolean {
         val ad = appOpenAd ?: return false
-        val elapsed = System.currentTimeMillis() - loadTime
-        return elapsed < AD_EXPIRY_MS
+        return (now - loadTime) < AD_EXPIRY_MS
     }
 }
