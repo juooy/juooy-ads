@@ -11,7 +11,8 @@ Pod::Spec.new do |spec|
     spec.ios.deployment_target    = '14.0'
     spec.dependency 'Google-Mobile-Ads-SDK', '~> 10.0'
                 
-    if !Dir.exist?('build/cocoapods/framework/ads.framework') || Dir.empty?('build/cocoapods/framework/ads.framework')
+    framework_dir = File.join(__dir__, 'build/cocoapods/framework/ads.framework')
+    if !Dir.exist?(framework_dir) || Dir.empty?(framework_dir)
         raise "
 
         Kotlin framework 'ads' doesn't exist yet, so a proper Xcode project can't be generated.

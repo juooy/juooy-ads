@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0.1] - 2026-06-27
+
+### Fixed
+- `ads.podspec`: use `__dir__`-relative path for framework existence check so `pod install` works correctly from any working directory (e.g. `iosApp/`)
+
 ## [1.1.0.0] - 2026-06-24
 
 ### Added
