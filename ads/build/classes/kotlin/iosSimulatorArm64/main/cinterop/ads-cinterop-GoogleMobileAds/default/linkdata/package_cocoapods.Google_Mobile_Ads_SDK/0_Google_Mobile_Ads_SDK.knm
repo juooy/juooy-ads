@@ -1,1996 +1,0 @@
-
-Ì¢
-	cocoapods
-Google_Mobile_Ads_SDK
-GADAdNetworkExtrasProtocolMeta
-platform
-darwin
-NSObjectProtocolMeta
-kotlinx
-cinterop
-ExternalObjCClass
-protocolGetter
-;kniprot_cocoapods_Google_Mobile_Ads_SDK0_GADAdNetworkExtras
-ExperimentalForeignApi
-GADAdNetworkExtrasProtocol
-NSObjectProtocol
-GADAdLoaderDelegateProtocolMeta
-<kniprot_cocoapods_Google_Mobile_Ads_SDK1_GADAdLoaderDelegate
-GADAdLoaderDelegateProtocol
-GADAdLoader
-adLoader
-
-Foundation
-NSError
-didFailToReceiveAdWithError
-kotlin
-Unit
-
-ObjCMethod
-selector
-%adLoader:didFailToReceiveAdWithError:
-encoding
-v32@0:8@16@24
-isStret
-adLoaderDidFinishLoading:
-
-v24@0:8@16
-adLoaderDidFinishLoading
-!GADAdMetadataDelegateProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK2_GADAdMetadataDelegate
-GADAdMetadataDelegateProtocol
-GADAdMetadataProviderProtocol
-ad
-adMetadataDidChange:
-adMetadataDidChange
-!GADAdMetadataProviderProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK3_GADAdMetadataProvider
-collections
-Map
-Any
-
-adMetadata
-@16@0:8
-adMetadataDelegate
-setAdMetadataDelegate:
-setAdMetadataDelegate
-value
-!GADBannerViewDelegateProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK4_GADBannerViewDelegate
-GADBannerViewDelegateProtocol
-GADBannerView
-
-bannerView
-bannerViewDidReceiveAd:
-bannerViewDidReceiveAd
-'bannerView:didFailToReceiveAdWithError:
-bannerViewDidRecordImpression:
-bannerViewDidRecordImpression
-bannerViewDidRecordClick:
-bannerViewDidRecordClick
-bannerViewWillPresentScreen:
-bannerViewWillPresentScreen
-bannerViewWillDismissScreen:
-bannerViewWillDismissScreen
-bannerViewDidDismissScreen:
-bannerViewDidDismissScreen
-GADAdSizeDelegateProtocolMeta
-:kniprot_cocoapods_Google_Mobile_Ads_SDK5_GADAdSizeDelegate
-GADAdSizeDelegateProtocol
-CValue
-	GADAdSize
-willChangeAdSizeTo
-adView:willChangeAdSizeTo:
-$v48@0:8@16{GADAdSize={CGSize=dd}Q}24
-adView
-%GADFullScreenPresentingAdProtocolMeta
-Bkniprot_cocoapods_Google_Mobile_Ads_SDK6_GADFullScreenPresentingAd
-!GADFullScreenPresentingAdProtocol
-$GADFullScreenContentDelegateProtocol
-fullScreenContentDelegate
-setFullScreenContentDelegate:
-setFullScreenContentDelegate
-(GADFullScreenContentDelegateProtocolMeta
-Ekniprot_cocoapods_Google_Mobile_Ads_SDK7_GADFullScreenContentDelegate
-adDidRecordImpression:
-adDidRecordImpression
-adDidRecordClick:
-adDidRecordClick
-*didFailToPresentFullScreenContentWithError
-.ad:didFailToPresentFullScreenContentWithError:
-adWillPresentFullScreenContent:
-adWillPresentFullScreenContent
-adWillDismissFullScreenContent:
-adWillDismissFullScreenContent
-adDidDismissFullScreenContent:
-adDidDismissFullScreenContent
-GADAppEventDelegateProtocolMeta
-<kniprot_cocoapods_Google_Mobile_Ads_SDK8_GADAppEventDelegate
-GADAppEventDelegateProtocol
-banner
-String
-didReceiveAppEvent
-withInfo
-#adView:didReceiveAppEvent:withInfo:
-v40@0:8@16@24@32
-GADInterstitialAd
-interstitialAd
-+interstitialAd:didReceiveAppEvent:withInfo:
-(GADAudioVideoManagerDelegateProtocolMeta
-Ekniprot_cocoapods_Google_Mobile_Ads_SDK9_GADAudioVideoManagerDelegate
-$GADAudioVideoManagerDelegateProtocol
-GADAudioVideoManager
-audioVideoManager
-audioVideoManagerWillPlayVideo:
-audioVideoManagerWillPlayVideo
-"audioVideoManagerDidPauseAllVideo:
-!audioVideoManagerDidPauseAllVideo
-audioVideoManagerWillPlayAudio:
-audioVideoManagerWillPlayAudio
-%audioVideoManagerDidStopPlayingAudio:
-$audioVideoManagerDidStopPlayingAudio
- GADCustomEventBannerProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK10_GADCustomEventBanner
-GADCustomEventBannerProtocol
-init
-internal
-CCall
-ConsumesReceiver
-ReturnsRetained
-adSize
-	parameter
-label
-GADCustomEventRequest
-request
-(requestBannerAd:parameter:label:request:
-*v64@0:8{GADAdSize={CGSize=dd}Q}16@40@48@56
-requestBannerAd
-$GADCustomEventBannerDelegateProtocol
-delegate
-setDelegate:
-setDelegate
-(GADCustomEventBannerDelegateProtocolMeta
-Fkniprot_cocoapods_Google_Mobile_Ads_SDK11_GADCustomEventBannerDelegate
-customEvent
-UIKit
-UIView
-didReceiveAd
-customEventBanner:didReceiveAd:
-customEventBanner
-	didFailAd
-customEventBanner:didFailAd:
-customEventBannerWasClicked:
-customEventBannerWasClicked
-"customEventBannerWillPresentModal:
-!customEventBannerWillPresentModal
-"customEventBannerWillDismissModal:
-!customEventBannerWillDismissModal
-!customEventBannerDidDismissModal:
- customEventBannerDidDismissModal
-clickDidOccurInAd
-$customEventBanner:clickDidOccurInAd:
-&customEventBannerWillLeaveApplication:
-%customEventBannerWillLeaveApplication
-UIViewController
-$viewControllerForPresentingModalView
-&GADCustomEventInterstitialProtocolMeta
-Dkniprot_cocoapods_Google_Mobile_Ads_SDK12_GADCustomEventInterstitial
-"GADCustomEventInterstitialProtocol
-serverParameter
-1requestInterstitialAdWithParameter:label:request:
-"requestInterstitialAdWithParameter
-rootViewController
-presentFromRootViewController:
-presentFromRootViewController
-*GADCustomEventInterstitialDelegateProtocol
-.GADCustomEventInterstitialDelegateProtocolMeta
-Lkniprot_cocoapods_Google_Mobile_Ads_SDK13_GADCustomEventInterstitialDelegate
-$customEventInterstitialDidReceiveAd:
-#customEventInterstitialDidReceiveAd
-"customEventInterstitial:didFailAd:
-customEventInterstitial
-"customEventInterstitialWasClicked:
-!customEventInterstitialWasClicked
-#customEventInterstitialWillPresent:
-"customEventInterstitialWillPresent
-#customEventInterstitialWillDismiss:
-"customEventInterstitialWillDismiss
-"customEventInterstitialDidDismiss:
-!customEventInterstitialDidDismiss
-NSObject
-%customEventInterstitial:didReceiveAd:
-,customEventInterstitialWillLeaveApplication:
-+customEventInterstitialWillLeaveApplication
-*GADCustomEventNativeAdDelegateProtocolMeta
-Hkniprot_cocoapods_Google_Mobile_Ads_SDK14_GADCustomEventNativeAdDelegate
-&GADCustomEventNativeAdDelegateProtocol
-GADCustomEventNativeAdProtocol
-customEventNativeAd
-didFailToLoadWithError
-+customEventNativeAd:didFailToLoadWithError:
-"GADMediatedUnifiedNativeAdProtocol
-!didReceiveMediatedUnifiedNativeAd
-6customEventNativeAd:didReceiveMediatedUnifiedNativeAd:
-"GADCustomEventNativeAdProtocolMeta
-@kniprot_cocoapods_Google_Mobile_Ads_SDK15_GADCustomEventNativeAd
-List
-adTypes
-options
-HrequestNativeAdWithParameter:request:adTypes:options:rootViewController:
-v56@0:8@16@24@32@40@48
-requestNativeAdWithParameter
-Boolean
-handlesUserClicks
-B16@0:8
-handlesUserImpressions
-&GADMediatedUnifiedNativeAdProtocolMeta
-Dkniprot_cocoapods_Google_Mobile_Ads_SDK16_GADMediatedUnifiedNativeAd
-view
-clickableAssetViews
-nonclickableAssetViews
-viewController
-JdidRenderInView:clickableAssetViews:nonclickableAssetViews:viewController:
-v48@0:8@16@24@32@40
-didRenderInView
-didRecordImpression
-v16@0:8
-GADNativeAssetIdentifier
-	assetName
-2didRecordClickOnAssetWithName:view:viewController:
-didRecordClickOnAssetWithName
-didUntrackView:
-didUntrackView
-headline
-images
-body
-GADNativeAdImage
-icon
-callToAction
-NSDecimalNumber
-
-starRating
-store
-price
-
-advertiser
-extraAssets
-adChoicesView
-	mediaView
-hasVideoContent
-Double
-CoreGraphics
-CGFloat
-mediaContentAspectRatio
-d16@0:8
-NSTimeInterval
-duration
-currentTime
-&GADVideoControllerDelegateProtocolMeta
-Dkniprot_cocoapods_Google_Mobile_Ads_SDK17_GADVideoControllerDelegate
-"GADVideoControllerDelegateProtocol
-GADVideoController
-videoController
-videoControllerDidPlayVideo:
-videoControllerDidPlayVideo
-videoControllerDidPauseVideo:
-videoControllerDidPauseVideo
-#videoControllerDidEndVideoPlayback:
-"videoControllerDidEndVideoPlayback
-videoControllerDidMuteVideo:
-videoControllerDidMuteVideo
-videoControllerDidUnmuteVideo:
-videoControllerDidUnmuteVideo
-%GADCustomNativeAdDelegateProtocolMeta
-Ckniprot_cocoapods_Google_Mobile_Ads_SDK18_GADCustomNativeAdDelegate
-!GADCustomNativeAdDelegateProtocol
-GADCustomNativeAd
-nativeAd
-"customNativeAdDidRecordImpression:
-!customNativeAdDidRecordImpression
-customNativeAdDidRecordClick:
-customNativeAdDidRecordClick
- customNativeAdWillPresentScreen:
-customNativeAdWillPresentScreen
- customNativeAdWillDismissScreen:
-customNativeAdWillDismissScreen
-customNativeAdDidDismissScreen:
-customNativeAdDidDismissScreen
-+GADCustomNativeAdLoaderDelegateProtocolMeta
-Ikniprot_cocoapods_Google_Mobile_Ads_SDK19_GADCustomNativeAdLoaderDelegate
-'GADCustomNativeAdLoaderDelegateProtocol
-#customNativeAdFormatIDsForAdLoader:
-
-@24@0:8@16
-"customNativeAdFormatIDsForAdLoader
-didReceiveCustomNativeAd
-"adLoader:didReceiveCustomNativeAd:
-1GADDebugOptionsViewControllerDelegateProtocolMeta
-Okniprot_cocoapods_Google_Mobile_Ads_SDK20_GADDebugOptionsViewControllerDelegate
--GADDebugOptionsViewControllerDelegateProtocol
-GADDebugOptionsViewController
-
-controller
-%debugOptionsViewControllerDidDismiss:
-$debugOptionsViewControllerDidDismiss
-GADNativeAdDelegateProtocolMeta
-=kniprot_cocoapods_Google_Mobile_Ads_SDK21_GADNativeAdDelegate
-GADNativeAdDelegateProtocol
-GADNativeAd
-nativeAdDidRecordImpression:
-nativeAdDidRecordImpression
-nativeAdDidRecordClick:
-nativeAdDidRecordClick
-#nativeAdDidRecordSwipeGestureClick:
-"nativeAdDidRecordSwipeGestureClick
-nativeAdWillPresentScreen:
-nativeAdWillPresentScreen
-nativeAdWillDismissScreen:
-nativeAdWillDismissScreen
-nativeAdDidDismissScreen:
-nativeAdDidDismissScreen
-nativeAdIsMuted:
-nativeAdIsMuted
-%GADNativeAdLoaderDelegateProtocolMeta
-Ckniprot_cocoapods_Google_Mobile_Ads_SDK22_GADNativeAdLoaderDelegate
-!GADNativeAdLoaderDelegateProtocol
-didReceiveNativeAd
-adLoader:didReceiveNativeAd:
-/GADNativeAdUnconfirmedClickDelegateProtocolMeta
-Mkniprot_cocoapods_Google_Mobile_Ads_SDK23_GADNativeAdUnconfirmedClickDelegate
-+GADNativeAdUnconfirmedClickDelegateProtocol
-#didReceiveUnconfirmedClickOnAssetID
--nativeAd:didReceiveUnconfirmedClickOnAssetID:
-"nativeAdDidCancelUnconfirmedClick:
-!nativeAdDidCancelUnconfirmedClick
-%GAMBannerAdLoaderDelegateProtocolMeta
-Ckniprot_cocoapods_Google_Mobile_Ads_SDK24_GAMBannerAdLoaderDelegate
-!GAMBannerAdLoaderDelegateProtocol
-validBannerSizesForAdLoader:
-validBannerSizesForAdLoader
-GAMBannerView
-didReceiveGAMBannerView
-!adLoader:didReceiveGAMBannerView:
-!GADMediationAdRequestProtocolMeta
-?kniprot_cocoapods_Google_Mobile_Ads_SDK25_GADMediationAdRequest
-GADMediationAdRequestProtocol
-publisherId
-credentials
-testMode
-networkExtras
-NSNumber
-childDirectedTreatment
-GADMaxAdContentRating
-maxAdContentRating
-underAgeOfConsent
-userKeywords
- GADMAdNetworkAdapterProtocolMeta
-adapterVersion
-networkExtrasClass
-#16@0:8
->kniprot_cocoapods_Google_Mobile_Ads_SDK26_GADMAdNetworkAdapter
-GADMAdNetworkAdapterProtocol
-GADMAdNetworkConnectorProtocol
-	connector
-initWithGADMAdNetworkConnector:
-initWithGADMAdNetworkConnector
-getBannerWithSize:
-!v40@0:8{GADAdSize={CGSize=dd}Q}16
-getBannerWithSize
-getInterstitial
-stopBeingDelegate
-*presentInterstitialFromRootViewController:
-)presentInterstitialFromRootViewController
-getNativeAdWithAdTypes:options:
-getNativeAdWithAdTypes
-changeAdSizeTo:
-changeAdSizeTo
-"GADMAdNetworkConnectorProtocolMeta
-@kniprot_cocoapods_Google_Mobile_Ads_SDK27_GADMAdNetworkConnector
-Float
-adVolume
-f16@0:8
-adMuted
-adapter
-adapter:didFailAd:
-didReceiveAdView
-adapter:didReceiveAdView:
-adapterDidReceiveInterstitial:
-adapterDidReceiveInterstitial
-*adapter:didReceiveMediatedUnifiedNativeAd:
-adapterDidGetAdClick:
-adapterDidGetAdClick
-"adapterWillPresentFullScreenModal:
-!adapterWillPresentFullScreenModal
-"adapterWillDismissFullScreenModal:
-!adapterWillDismissFullScreenModal
-!adapterDidDismissFullScreenModal:
- adapterDidDismissFullScreenModal
-adapterWillPresentInterstitial:
-adapterWillPresentInterstitial
-adapterWillDismissInterstitial:
-adapterWillDismissInterstitial
-adapterDidDismissInterstitial:
-adapterDidDismissInterstitial
-didReceiveInterstitial
-adapter:didReceiveInterstitial:
-clickDidOccurInBanner
-adapter:clickDidOccurInBanner:
-didFailInterstitial
-adapter:didFailInterstitial:
-adapterWillLeaveApplication:
-adapterWillLeaveApplication
-GADMediationAdProtocolMeta
-8kniprot_cocoapods_Google_Mobile_Ads_SDK28_GADMediationAd
-GADMediationAdProtocol
-'GADMediationAdEventDelegateProtocolMeta
-Ekniprot_cocoapods_Google_Mobile_Ads_SDK29_GADMediationAdEventDelegate
-#GADMediationAdEventDelegateProtocol
-reportImpression
-reportClick
-willPresentFullScreenView
-error
-didFailToPresentWithError:
-didFailToPresentWithError
-willDismissFullScreenView
-didDismissFullScreenView
--GADMediationBannerAdEventDelegateProtocolMeta
-Kkniprot_cocoapods_Google_Mobile_Ads_SDK30_GADMediationBannerAdEventDelegate
-)GADMediationBannerAdEventDelegateProtocol
-willBackgroundApplication
-3GADMediationInterstitialAdEventDelegateProtocolMeta
-Qkniprot_cocoapods_Google_Mobile_Ads_SDK31_GADMediationInterstitialAdEventDelegate
-/GADMediationInterstitialAdEventDelegateProtocol
--GADMediationNativeAdEventDelegateProtocolMeta
-Kkniprot_cocoapods_Google_Mobile_Ads_SDK32_GADMediationNativeAdEventDelegate
-)GADMediationNativeAdEventDelegateProtocol
-didPlayVideo
-didPauseVideo
-didEndVideo
-didMuteVideo
-didUnmuteVideo
-/GADMediationRewardedAdEventDelegateProtocolMeta
-Mkniprot_cocoapods_Google_Mobile_Ads_SDK33_GADMediationRewardedAdEventDelegate
-+GADMediationRewardedAdEventDelegateProtocol
-didRewardUser
-didStartVideo
-GADAdReward
-reward
-didRewardUserWithReward:
-didRewardUserWithReward
-.GADMediationAppOpenAdEventDelegateProtocolMeta
-Lkniprot_cocoapods_Google_Mobile_Ads_SDK34_GADMediationAppOpenAdEventDelegate
-*GADMediationAppOpenAdEventDelegateProtocol
-!GADMediationAppOpenAdProtocolMeta
-?kniprot_cocoapods_Google_Mobile_Ads_SDK35_GADMediationAppOpenAd
-GADMediationAppOpenAdProtocol
-presentFromViewController:
-presentFromViewController
- GADMediationBannerAdProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK36_GADMediationBannerAd
-GADMediationBannerAdProtocol
-'GADMediationInterscrollerAdProtocolMeta
-Ekniprot_cocoapods_Google_Mobile_Ads_SDK37_GADMediationInterscrollerAd
-#GADMediationInterscrollerAdProtocol
-delegateInterscrollerEffect
-setDelegateInterscrollerEffect:
-
-v20@0:8B16
-setDelegateInterscrollerEffect
-&GADMediationInterstitialAdProtocolMeta
-Dkniprot_cocoapods_Google_Mobile_Ads_SDK38_GADMediationInterstitialAd
-"GADMediationInterstitialAdProtocol
- GADMediationNativeAdProtocolMeta
->kniprot_cocoapods_Google_Mobile_Ads_SDK39_GADMediationNativeAd
-GADMediationNativeAdProtocol
-debugDescription
-"GADMediationRewardedAdProtocolMeta
-@kniprot_cocoapods_Google_Mobile_Ads_SDK40_GADMediationRewardedAd
-GADMediationRewardedAdProtocol
-GADMediationAdapterProtocolMeta
-GADVersionNumber
-{GADVersionNumber=qqq}16@0:8
-adSDKVersion
-GADMediationServerConfiguration
-configuration
-	Function1
-'GADMediationAdapterSetUpCompletionBlock
-completionHandler
-)setUpWithConfiguration:completionHandler:
-v32@0:8@16@?24
-setUpWithConfiguration
-=kniprot_cocoapods_Google_Mobile_Ads_SDK41_GADMediationAdapter
-GADMediationAdapterProtocol
-!GADMediationBannerAdConfiguration
-adConfiguration
-	Function2
-'GADMediationBannerLoadCompletionHandler
-/loadBannerForAdConfiguration:completionHandler:
-loadBannerForAdConfiguration
-0GADMediationInterscrollerAdLoadCompletionHandler
-8loadInterscrollerAdForAdConfiguration:completionHandler:
-%loadInterscrollerAdForAdConfiguration
-'GADMediationInterstitialAdConfiguration
--GADMediationInterstitialLoadCompletionHandler
-5loadInterstitialForAdConfiguration:completionHandler:
-"loadInterstitialForAdConfiguration
-!GADMediationNativeAdConfiguration
-'GADMediationNativeLoadCompletionHandler
-1loadNativeAdForAdConfiguration:completionHandler:
-loadNativeAdForAdConfiguration
-#GADMediationRewardedAdConfiguration
-)GADMediationRewardedLoadCompletionHandler
-3loadRewardedAdForAdConfiguration:completionHandler:
- loadRewardedAdForAdConfiguration
-?loadRewardedInterstitialAdForAdConfiguration:completionHandler:
-,loadRewardedInterstitialAdForAdConfiguration
-"GADMediationAppOpenAdConfiguration
-(GADMediationAppOpenLoadCompletionHandler
-2loadAppOpenAdForAdConfiguration:completionHandler:
-loadAppOpenAdForAdConfiguration
-GADRTBAdapterProtocolMeta
-7kniprot_cocoapods_Google_Mobile_Ads_SDK42_GADRTBAdapter
-GADRTBAdapterProtocol
-GADRTBRequestParameters
-params
-GADRTBSignalCompletionHandler
-5collectSignalsForRequestParameters:completionHandler:
-"collectSignalsForRequestParameters
-GADAdChoicesViewMeta
-
-UIViewMeta
-GADAdChoicesView
-new
-CPointer
-cnames
-structs
-_NSZone
-zone
-allocWithZone:
-@24@0:8^{_NSZone=}16
-
-Deprecated
-message
-)Use constructor or factory method instead
-replaceWith
-ReplaceWith
-imports
-
-expression
- 
-level
-DeprecationLevel
-WARNING
-allocWithZone
-alloc
-
-appearance
-UIAppearanceContainerProtocol
-ContainerClass
-Array
-args
-appearanceWhenContainedIn:
-
-@24@0:8#16
-appearanceWhenContainedIn
-containerTypes
-,appearanceWhenContainedInInstancesOfClasses:
-+appearanceWhenContainedInInstancesOfClasses
-UITraitCollection
-trait
-appearanceForTraitCollection:
-appearanceForTraitCollection
-whenContainedIn
--appearanceForTraitCollection:whenContainedIn:
-@32@0:8@16#24
-!whenContainedInInstancesOfClasses
-?appearanceForTraitCollection:whenContainedInInstancesOfClasses:
-@32@0:8@16@24
-CGRect
-frame
-ObjCConstructor
-
-designated
-initSelector
-initWithFrame:
-NSCoder
-coder
-initWithCoder:
-Use constructor instead
-GADAdChoicesView(frame)
-ERROR
-)@48@0:8{CGRect={CGPoint=dd}{CGSize=dd}}16
-initWithFrame
-GADAdChoicesView(coder)
-initWithCoder
-GADAdChoicesView()
-	Companion
-ObjCClassOf
-GADAdLoaderMeta
-NSObjectMeta
-adUnitID
-4initWithAdUnitID:rootViewController:adTypes:options:
-;GADAdLoader(adUnitID, rootViewController, adTypes, options)
-@48@0:8@16@24@32@40
-initWithAdUnitID
-
-GADRequest
-loadRequest:
-loadRequest
-	isLoading
-GADAdLoader()
-loading
-GADRequestMeta
-NSCopyingProtocolMeta
-NSCopyingProtocol
-extras
-registerAdNetworkExtras:
-registerAdNetworkExtras
-aClass
-adNetworkExtrasFor:
-adNetworkExtrasFor
-removeAdNetworkExtrasFor:
-
-v24@0:8#16
-removeAdNetworkExtrasFor
-UIWindowScene
-scene
-	setScene:
-setScene
-keywords
-setKeywords:
-setKeywords
-
-contentURL
-setContentURL:
-setContentURL
-neighboringContentURLStrings
- setNeighboringContentURLStrings:
-setNeighboringContentURLStrings
-requestAgent
-setRequestAgent:
-setRequestAgent
-GADRequest()
-NSZone
-copyWithZone:
-copyWithZone
-GADAdLoaderOptionsMeta
-GADAdLoaderOptions
-GADAdLoaderOptions()
-GADAdRewardMeta
-
-rewardType
-rewardAmount
- initWithRewardType:rewardAmount:
-%GADAdReward(rewardType, rewardAmount)
-initWithRewardType
-type
-amount
-GADAdReward()
-GADBannerViewMeta
-CGPoint
-origin
-initWithAdSize:origin:
-initWithAdSize:
-GADBannerView(adSize, origin)
-/@56@0:8{GADAdSize={CGSize=dd}Q}16{CGPoint=dd}40
-initWithAdSize
-GADBannerView(adSize)
-!@40@0:8{GADAdSize={CGSize=dd}Q}16
-setAdUnitID:
-setAdUnitID
-setRootViewController:
-setRootViewController
-{GADAdSize={CGSize=dd}Q}16@0:8
-
-setAdSize:
-	setAdSize
-adSizeDelegate
-setAdSizeDelegate:
-setAdSizeDelegate
-isAutoloadEnabled
-autoloadEnabled
-setAutoloadEnabled:
-setAutoloadEnabled
-GADResponseInfo
-responseInfo
-
-GADAdValue
-GADPaidEventHandler
-paidEventHandler
-@?16@0:8
-setPaidEventHandler:
-v24@0:8@?16
-setPaidEventHandler
-GADBannerView(frame)
-GADBannerView(coder)
-GADBannerView()
-GADResponseInfoMeta
-responseIdentifier
-extrasDictionary
-GADAdNetworkResponseInfo
-loadedAdNetworkResponseInfo
-adNetworkInfoArray
-dictionaryRepresentation
-adNetworkClassName
-GADResponseInfo()
-GADAdNetworkResponseInfoMeta
-adUnitMapping
-adSourceName
-
-adSourceID
-adSourceInstanceName
-adSourceInstanceID
-latency
-GADAdNetworkResponseInfo()
-GADAdValueMeta
-Long
-GADAdValuePrecision
-	precision
-q16@0:8
-currencyCode
-GADAdValue()
-GADInterstitialAdMeta
-&GADInterstitialAdLoadCompletionHandler
-+loadWithAdUnitID:request:completionHandler:
-v40@0:8@16@24@?32
-loadWithAdUnitID
-ObjCObjectVar
-'canPresentFromRootViewController:error:
-B32@0:8@16^@24
- canPresentFromRootViewController
-GADInterstitialAd()
-object
-isEqual:
-
-B24@0:8@16
-isEqual
-	ObjCClass
-class
-CPointed
-COpaquePointer
-	aSelector
-performSelector:
-
-@24@0:8:16
-performSelector
-
-withObject
-performSelector:withObject:
-@32@0:8:16@24
-_withObject
-&performSelector:withObject:withObject:
-@40@0:8:16@24@32
-isProxy
-isKindOfClass:
-
-B24@0:8#16
-isKindOfClass
-isMemberOfClass:
-isMemberOfClass
-	objcnames
-classes
-Protocol
-	aProtocol
-conformsToProtocol:
-conformsToProtocol
-respondsToSelector:
-
-B24@0:8:16
-respondsToSelector
-ULong
-
-NSUInteger
-hash
-Q16@0:8
-
-superclass
-description
-GADAppOpenAdMeta
-GADAppOpenAd
-!GADAppOpenAdLoadCompletionHandler
-UIInterfaceOrientation
-orientation
-7loadWithAdUnitID:request:orientation:completionHandler:
-v48@0:8@16@24q32@?40
-GADAppOpenAd()
-GADAudioVideoManagerMeta
- audioSessionIsApplicationManaged
-$setAudioSessionIsApplicationManaged:
-#setAudioSessionIsApplicationManaged
-GADAudioVideoManager()
-GADCustomEventRequestMeta
-additionalParameters
-	isTesting
-GADCustomEventRequest()
-GADCustomEventExtrasMeta
-GADCustomEventExtras
-forLabel
-setExtras:forLabel:
-	setExtras
-extrasForLabel:
-extrasForLabel
-removeAllExtras
-	allExtras
-GADCustomEventExtras()µ
- 
- 
- 
-
-
- 
-
-
- 
- 
- 
- 
- 
- 
- 
-
- 
-
- 
- 
-! 
-# 
-$ 
-( 
-*
-+ 
-, 
-3 
-5 
-6 
-E 
-G 
-H 
-I 
-N 
-P 
-Q 
-U 
-c 
-e 
-g 
-l 
-o 
-q 
-r 
-| 
-~ 
-Ä
-/Å 
-0Ç 
-0É 
-á 
-å 
-ê 
-ì
-6î 
-6¶ 
-® 
-™ 
-± 
-≤ 
-¿ 
-ƒ 
-∆ 
-« 
-À 
-Œ 
-– 
-÷ 
-⁄ 
-Â 
-Ó 
-Ò 
-˙ 
-˚
-J¸ 
-ˇ 
-Ç 
-Ñ 
-Ö 
-ë 
-ì 
-î 
-† 
-¢ 
-® 
-™ 
-´ 
-Ø 
-± 
-≤ 
-¡ 
-√ 
-∆ 
-» 
-Õ 
-œ 
-“ 
-’ 
-◊ 
-‹ 
-ﬁ 
-‚ 
-Á 
-Ë 
-˜ 
-˘ 
-ö 
-ú 
-ù 
-ü 
-® 
-™ 
-¨ 
-Æ 
-Ø 
-± 
-∑ 
-π 
-º 
-¿ 
-¬ 
-√ 
-≈ 
-» 
-  
-À 
-Õ 
-“ 
-‘ 
-’ 
-◊ 
-Ÿ 
-€ 
-‹ 
-› 
-‡ 
-‚ 
-„ 
-È 
-Í 
-Ï 
-Ì 
- 
-Û 
-Ù 
-˜ 
-¯ 
-˚ 
-¸ 
-Å 
-Ç 
-Ö 
-á 
-à 
-ä 
-ç 
-6é 
-è 
-ë 
-í
-†ì
-°î 
-ò 
-ú 
-° 
-6¶ 
-® 
-6∞ 
-J∫ 
-º 
-¿ 
-ûÀ 
-Ã 
-Õ 
-Œ 
-‘ 
-À 
-⁄ 
-€ 
-‹ 
-6Ê 
-˜ 
-∞À 
-˙ 
-˚ 
-πÀ 
-˝ 
-wÀ 
-Ü 
-Já 
-û 
-† 
-° 
-À 
-™ 
-≠ 
-øÀ 
-≥ 
-ƒÀ 
-ª 
-º 
-Ω 
-¿À 
-¬ 
-√ 
-« 
-– 
-“ 
-” 
-‰
-“Â
-”Ê 
-Ì 
-Ó 
-)À 
-Û 
-Ù 
-ı 
-6ˆ 
-ŸÀ 
-˚ 
-,À 
-Ä 
-3À 
-Ñ 
-Ö 
-‚À "g20“
-	(
-“
-	"g
-20“
-	(
-“
-	"g20“
-	(“
-	"ég20J;02020H'“
- (( J3 020H“
- (( “
-	(“
-	"g20“
-	("“
-	"Qg20J3'02%0H'“
- (&( “
-	("“
-	"g20“
-	()“
-	"‹g20J9-00H'“
- (-(. J-/0H'“
- (/(. J5102/0H'“
- (0( R:-008«ä (-(. Ra/02208«@«XÜä (/(. í (0( “
-	()“
-	"g20“
-	(4“
-	"óg20J390270H“
- (8( J;7027020H“
- (:( J3<0270H“
- (;( J3>0270H“
- (=( J3@0270H“
- (?( J3B0270H“
- (A( J3D0270H“
- (C( “
-	(4“
-	"g20“
-	(F“
-	"_g20JAM02702J0!0 H'“
- (K(L “
-	(F“
-	"g"20“
-	(O“
-	"Âg#20J-R0$H'“
- (R(. J5T02R0$H'“
- (S( RaR0$220$8«@«XÜä (R(. í (S( “
-	(O“
-	"g%20“
-	(V“
-	"‚g$20J3X02%0#H“
- (W( J3Z02%0#H“
- (Y( J;%02%0#2[0H“
- (\( J3^02%0#H“
- (]( J3`02%0#H“
- (_( J3b02%0#H“
- (a( “
-	(V“
-	"g&20“
-	(d“
-	"™g'20JEM02f02h0(2i0(H“
- (j(k JEm02m0)2h0(2i0(H“
- (n(k “
-	(d“
-	"g*20“
-	(p“
-	"g+20J3u02s0,H“
- (t( J3w02s0,H“
- (v( J3y02s0,H“
- (x( J3{02s0,H“
- (z( “
-	(p“
-	"g-20“
-	(}“
-	"Çg.20J50.H'“
- ((. “
-1“
-2J\ã02Ñ0!0 2	Ö0(2	Ü0(2à03H'“
-"	(â	(ä J/ç04H'“
-!	(ç(. J8è02	ç04H'“
-!	(é( Rdç0422048«@«XÜä!	(ç(. í!	(é( “
-	(}“
-	"g520“
-		(ë“
-	"Ÿg420J?ó02í0.2ï07H'“
-!	(ñ( JAó02í0.2	ò0H'“
-!	(ô( J6õ02í0.H'“
-!	(ö( J6ù02í0.H'“
-!	(ú( J6ü02í0.H'“
-!	(û( J6°02í0.H'“
-!	(†( J?ó02í0.2¢07H'“
-!	(£( J6•02í0.H'“
-!	(§( J-ß08H'“
-!	(ß(. R.ß088«ä!	(ß(. “
-		(ë“
-	"g920“
-		(©“
-	"´g:20J50:H'“
- ((. “
-1“
-2JL≠02	´0(2	Ü0(2à03H'“
-!	(¨(k J6∞02Æ08H'“
-!	(Ø( J/ç0;H'“
-!	(ç(. J8è02	ç0;H'“
-!	(é( Rdç0;220;8«@«XÜä!	(ç(. í!	(é( “
-		(©“
-	"g<20“
-		(≥“
-	"Òg;20J6µ02í0:H'“
-!	(¥( JA∑02í0:2	ò0H'“
-!	(∂( J6π02í0:H'“
-!	(∏( J6ª02í0:H'“
-!	(∫( J6Ω02í0:H'“
-!	(º( J6ø02í0:H'“
-!	(æ( J?∑02í0:2ï0=H'“
-!	(¡( J6√02í0:H'“
-!	(¬( “
-		(≥“
-	"g>20“
-		(≈“
-	"üg?20J?»02»0@2…0H'“
-!	( ( J?»02»0@2Ã0AH'“
-!	(Õ( “
-		(≈“
-	"gB20“
-		(œ“
-	"Íg@20J50@H'“
- ((. “
-1“
-2Jc’02´0(2à032—0C2“0C2Æ08H'“
-"	(”	(‘ J.◊0DH'“
-"	(◊	(ÿ J.Ÿ0DH'“
-"	(Ÿ	(ÿ J/ç0?H'“
-!	(ç(. J8è02	ç0?H'“
-!	(é( Rdç0?220?8«@«XÜä!	(ç(. í!	(é( “
-		(œ“
-	"gE20“
-		(€“
-	"•gA20Jj‚02‹072›002ﬁ002ﬂ08H“
-"	(‡	(· J.„0H“
-"	(„	(‰ JPË02Ê
-0(j`F2‹072ﬂ08H“
-!	(Á(k J8Í02	‹07H“
-!	(È( J/Î0(H'“
-!	(Î(. J3Ï0CH'“
-!	(Ï(. J/Ì0(H'“
-!	(Ì(. J/Ô0GH'“
-!	(Ô(. J/0(H'“
-!	((. J/Ú0HH'“
-!	(Ú(. J/Û0(H'“
-!	(Û(. J/Ù0(H'“
-!	(Ù(. J/ı0(H'“
-!	(ı(. J;ˆ00H'“
-!	(ˆ(. J/˜07H“
-!	(˜(. J/¯07H“
-!	(¯(. J.˘0DH“
-"	(˘	(ÿ J2˝0Ij`KH“
-"	(˝	(˛ J2Ä0Ij`LH“
-"	(Ä	(˛ J2Å0Ij`LH“
-"	(Å	(˛ R0Î0(8«ä!	(Î(. R4Ï0C8«ä!	(Ï(. R0Ì0(8«ä!	(Ì(. R0Ô0G8«ä!	(Ô(. R00(8«ä!	((. R0Ú0H8«ä!	(Ú(. R0Û0(8«ä!	(Û(. R0Ù0(8«ä!	(Ù(. R0ı0(8«ä!	(ı(. R<ˆ008«ä!	(ˆ(. R0˜078«ä!	(˜(. R0¯078«ä!	(¯(. R/˘0D8«ä"	(˘	(ÿ R3˝0Ij`K8«ä"	(˝	(˛ R3Ä0Ij`L8«ä"	(Ä	(˛ R3Å0Ij`L8«ä"	(Å	(˛ “
-		(€“
-	"gM20“
-		(É“
-	"µgN20J6à02Ü0OH“
-!	(á( J6ä02Ü0OH“
-!	(â( J6å02Ü0OH“
-!	(ã( J6é02Ü0OH“
-!	(ç( J6ê02Ü0OH“
-!	(è( “
-		(É“
-	"gP20“
-		(í“
-	"µgQ20J6ó02ï0RH“
-!	(ñ( J6ô02ï0RH“
-!	(ò( J6õ02ï0RH“
-!	(ö( J6ù02ï0RH“
-!	(ú( J6ü02ï0RH“
-!	(û( “
-		(í“
-	"gS20“
-		(°“
-	"ògT20J:•0C20H'“
-"	(£	(§ J=0202¶0RH'“
-!	(ß( “
-		(°“
-	"gU20“
-		(©“
-	"UgV20J6Æ02¨0WH'“
-!	(≠( “
-		(©“
-	"gX20“
-		(∞“
-	"•gY20J6¥02ï0ZH“
-!	(≥( J6∂02ï0ZH“
-!	(µ( J6∏02ï0ZH“
-!	(∑( J6∫02ï0ZH“
-!	(π( J6º02ï0ZH“
-!	(ª( J6æ02ï0ZH“
-!	(Ω( J6¿02ï0ZH“
-!	(ø( “
-		(∞“
-	"g[20“
-		(¬“
-	"\g\20J=0202ƒ0ZH'“
-!	(≈( “
-		(¬“
-	"g]20“
-		(«“
-	"ûg^20JGï02ï0Z2…
-0(j`FH'“
-!	( ( J6Ã02ï0ZH'“
-!	(À( “
-		(«“
-	"g_20“
-		(Œ“
-	"òg`20J:—0C20H'“
-"	(–	(§ J=0202”0aH'“
-!	(‘( “
-		(Œ“
-	"gb20“
-		(÷“
-	"∫gc20J/ÿ0(H'“
-!	(ÿ(. J;Ÿ00H'“
-!	(Ÿ(. J.⁄0DH'“
-"	(⁄	(ÿ J/€0
-H'“
-!	(€(. J/›0dH'“
-!	(›(. J5ﬂ
-0(j`eH'“
-!	(ﬂ(. J/‡0dH'“
-!	(‡(. J3·0CH'“
-!	(·(. “
-		(÷“
-	"Ägf20J/„0(H'“
-!	(„(. J0‰0
-H'“
-"	(‰	(Â “
-		(Ê“
-	"©gg20JEÎ0g2	È0hH'“
-"	(Í	(§ “
-1“
-2J=Ó02Ñ0!0 H'“
-"	(Ï	(Ì J.Ô0H'“
-"	(Ô	(‰ J.0H'“
-"	(	(‰ J8Ú02	Æ08H'“
-!	(Ò( JKÙ02—0C2“0CH“
-!	(Û( J.◊0DH“
-"	(◊	(ÿ J.Ÿ0DH“
-"	(Ÿ	(ÿ J=ˆ02Ñ0!0 H“
-"	(ı	(Ì “
-		(Ê“
-	"gi20b“
-		(¯“
-	"÷gh20cJ/ß08H'“
-!	(ß(. J.˙0jH'“
-"	(˙	(˚ J.¸0DH'“
-"	(¸	(ÿ JC˝02	˝0g2	ò0H'“
-!	(˛( JC˝02	˝0g2	ˇ07H'“
-!	(Ä( J8Ç02	˝0gH'“
-!	(Å( JC˝02	˝0g2	Ã0AH'“
-!	(É( J8Ö02	˝0gH'“
-!	(Ñ( J8á02	˝0gH'“
-!	(Ü( J8â02	˝0gH'“
-!	(à( J8ã02	˝0gH'“
-!	(ä( J8ç02	˝0gH'“
-!	(å( J8è02	˝0gH'“
-!	(é( J8ë02	˝0gH'“
-!	(ê( JC˝02	˝0g2	í0=H'“
-!	(ì( JC˝02	˝0g2	î07H'“
-!	(ï( JC˝02	˝0g2	ñ0H'“
-!	(ó( J8ô02	˝0gH'“
-!	(ò( “
-		(¯“
-	"gk20“
-		(õ“
-	"gl20“
-		(õ“
-	"gm20“
-		(û“
-	"≈gn20J.†0H'“
-"	(†	(‰ J.°0H'“
-"	(°	(‰ J.¢0H'“
-"	(¢	(‰ J6•02£0H'“
-!	(§( J.¶0H'“
-"	(¶	(‰ J.ß0H'“
-"	(ß	(‰ “
-		(û“
-	"go20m“
-		(©“
-	"Mgp20nJ.´0H'“
-"	(´	(‰ “
-		(©“
-	"gq20m“
-		(≠“
-	"Mgr20nJ.´0H'“
-"	(´	(‰ “
-		(≠“
-	"gs20m“
-		(∞“
-	"Ωgt20nJ.≤0H'“
-"	(≤	(‰ J.≥0H'“
-"	(≥	(‰ J.¥0H'“
-"	(¥	(‰ J.µ0H'“
-"	(µ	(‰ J.∂0H'“
-"	(∂	(‰ J.´0H'“
-"	(´	(‰ “
-		(∞“
-	"gu20m“
-		(∏“
-	"Âgv20nJ.∫0H'“
-"	(∫	(‰ J.ª0H'“
-"	(ª	(‰ J.¥0H'“
-"	(¥	(‰ J6ø02Ω0wH'“
-!	(æ( “
-		(∏“
-	"gx20m“
-		(¡“
-	"gy20n“
-		(¡“
-	"gz20k“
-		(ƒ“
-	"Ug{20lJ6«02ﬂ08H'“
-!	(∆( “
-		(ƒ“
-	"g|20k“
-		(…“
-	"ªg}20lJ=ˆ02Ñ0!0 H“
-"	(ı	(Ì J-‹07H'“
-!	(‹(. R.‹078«ä!	(‹(. “
-		(…“
-	"g~20|“
-		(Ã“
-	"Íg20}J.Œ0DH'“
-"	(Œ	(ÿ J7—02Œ0DH'“
-"	(œ	(– RbŒ0D220D8«@«XÜä"	(Œ	(ÿ í"	(œ	(– “
-		(Ã“
-	"gÄ20k“
-		(”“
-	"VgÅ20lJ6«02ﬂ08H'“
-!	(∆( “
-		(”“
-	""gÇ20k20E“
-		(÷“
-	"≥gÉ20l20AJ.◊0DH“
-"	(◊	(ÿ J.Ÿ0DH“
-"	(Ÿ	(ÿ J/ÿ0(H“
-!	(ÿ(. “
-		(÷“
-	"gÑ20k“
-		(⁄“
-	"VgÖ20lJ6«02ﬂ08H'“
-!	(∆( “
-		(⁄“
-	"ôgÜ20J5„	0á0 H'“
-"	(„	(ﬁ J5ﬂ	0á0 H'“
-"	(ﬂ	(ﬁ J0‰0
-H'“
-"	(‰	(Â JYÁ02·0à2‰000âj`äH“
-"	(Â	(Ê “
-		(Ë“
-	"ùgã20J60ãH'“
- ((. “
-1“
-2JcÔ02Î0å2)‰$0}00p0çj`éH“
-"	(Ó	(Ê JcÚ02Î0å2)‰$000p0çj`èH“
-"	(Ò	(Ê Jdˆ02Î0ê2*‰%0Å00r0çj`ëH“
-"	(ı	(Ê Jd˙02Î0í2*‰%0É00t0çj`ìH“
-"	(˘	(Ê Jd˛02Î0î2*‰%0Ö00v0çj`ïH“
-"	(˝	(Ê JdÄ02Î0î2*‰%0Ö00v0çj`ïH“
-"	(ˇ	(Ê JcÑ02Î0ñ2)‰$0{00y0çj`óH“
-"	(É	(Ê “
-		(Ë“
-	"gò20Ü“
-		(Ü“
-	"∫gô20ãJaå02â0ö2'‰"0(000çj`õH'“
-"	(ã	(Ê J60ôH'“
- ((. “
-1“
-2“
-		(Ü“
-	"˘ú20ùBJ1ê0ûHó “
-!	(ê(. Jâ£0û2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0ûHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢J/•0ûHó “
-!	(•(. JT¨0û2
-ß0¶2©00ß"0Hó “
-"	(™	(´ J=Ø0û2≠0CHó “
-"	(Æ	(§ J:≥0û2±0®Hó “
-"	(≤	(§ J^≥0û2±0®2
-¥0¶2©00ß"0Hó “
-"	(µ	(∂ JG≥0û2±0®2∑0CHó “
-"	(∏	(π “
-“
-	"≥û À207:ÀB/ª	0©0 “
-™	Ω
-æ(øB)¡0´“
-™	Ω
-æ(¬B“
-™	Ω 	æ(Jé«0û2ª	0©0 Hó “
-A£
-ô(√!õB§ù
-û(ƒ†
-0•8≈“
-"	(ø	(∆ “
-1“
-2Jä…0û2¡0´Hó “
-A£
-ô(√!õB§ù
-û(»†
-0•8≈“
-"	(¬	(§ “
-1“
-2J}0ûHó “
-A£
-ô(√!õB§ù
-û( †
-0•8≈“
- ((. “
-1“
-2“
-“
-	"Ü¨20ú2
-0û0≠B"ÀÆ20ØBJ0ê0Hó “
-!	(ê(. Jà£02ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§0Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"â À20=:ÀBOœ0(	Æ08—0C“0C“
-™	Ω
-æ(–B“
-™	Ω	æ(J≠”02œ0(2	Æ082—0C2“0CHó “
-A£
-ô(√!õB§ù
-û(—†
-0•8≈“
-"	(–	(“ “
-1“
-2J:÷02
-à0∞Hó “
-!	(’( J0ç0Hó “
-!	(ç(. J9è02	ç0Hó “
-!	(é( J.œ0(Hó “
-!	(œ(. J/◊0DHó “
-"	(◊	(ÿ J|0Hó “
-A£
-ô(√!õB§ù
-û(ÿ†
-0•8≈“
- ((. “
-1“
-2Rdç02208«@«XÜä!	(ç(. í!	(é( R.œ0(8«ä!	(œ(. R/Ÿ0D8«ä"	(◊	(ÿ “
-“
-	"Ü±20Æ2	00≠B"Ñ≤20Ø20≥BJ/à0∞Hó “
-!	(à(. J1ê0∞Hó “
-!	(ê(. Jâ£0∞2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0∞Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"˛∞ À20=20¥:ÀB“
-™	Ω	æ(J7ﬂ02›0
-Hó “
-!	(ﬁ( J:‚0
-2‡0
-Hó “
-"	(·	(´ J8Â02‡0
-Hó “
-"	(„	(‰ J1Á0µHó “
-!	(Á(. J:È02
-Á0µHó “
-!	(Ë( J4Í0CHó “
-!	(Í(. J=Ï02Í0CHó “
-!	(Î( J0Ì0(Hó “
-!	(Ì(. J9Ô02	Ì0(Hó “
-!	(Ó( J40CHó “
-!	((. J=Ú020CHó “
-!	(Ò( J0Û0(Hó “
-!	(Û(. J9ı02	Û0(Hó “
-!	(Ù( J}0∞Hó “
-A£
-ô(√!õB§ù
-û(ˆ†
-0•8≈“
- ((. “
-1“
-2JL˘02ï
-0¢j`∂0üHó “
-"	(¯	(ó “
-2RfÁ0µ2	20µ8«@«XÜä!	(Á(. í!	(Ë( RlÍ0C220C8«@«XÜä!	(Í(. í!	(Î( RdÌ0(220(8«@«XÜä!	(Ì(. í!	(Ó( Rl0C220C8«@«XÜä!	((. í!	(Ò( RdÛ0(220(8«@«XÜä!	(Û(. í!	(Ù( “
-“
-	"Ü∑20≤2
-0∞0≠B"Œ∏20ØBJ1ê0πHó “
-!	(ê(. Jâ£0π2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0πHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"ππ À20=:ÀB“
-™	Ω	æ(J}0πHó “
-A£
-ô(√!õB§ù
-û(¸†
-0•8≈“
- ((. “
-1“
-2“
-“
-	"Ü∫20∏2
-0π0≠B"Àª20ØBJ0ê0wHó “
-!	(ê(. Jà£0w2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§0wHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"ƒw À20=:ÀB5	˛0(	ˇ0H“
-™	Ω
-æ(ÄB“
-™	Ω 	æ(JìÇ0w2	˛0(2	ˇ0HHó “
-A£
-ô(√!õB§ù
-û(Å†
-0•8≈“
-"	(Ä	(π “
-1“
-2J.É0(Hó “
-!	(É(. J.Ñ0HHó “
-!	(Ñ(. J|0wHó “
-A£
-ô(√!õB§ù
-û(Ö†
-0•8≈“
- ((. “
-1“
-2R.É0(8«ä!	(É(. R.Ñ0H8«ä!	(Ñ(. “
-“
-	"Üº20ª2	0w0≠B"Ω20ùBJ0ê0Hó “
-!	(ê(. Jà£02ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§0Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢J.•0Hó “
-!	(•(. JS¨02
-ß0¶2©00ß"0Hó “
-"	(™	(´ J<Ø02≠0CHó “
-"	(Æ	(§ J9≥02±0®Hó “
-"	(≤	(§ J]≥02±0®2
-¥0¶2©00ß"0Hó “
-"	(µ	(∂ JF≥02±0®2∑0CHó “
-"	(∏	(π “
-“
-	"• À207:ÀB>Ñ0!0 à	0æ0 “
-™	Ω
-æ(âB.Ñ0!0 “
-™	Ω
-æ(äB/ª	0©0 “
-™	Ω
-æ(øB)¡0´“
-™	Ω
-æ(¬B“
-™	Ω 	æ(Júç02Ñ0!0 2à	0æ0 Hó “
-A£
-ô(√!õB§ù
-û(ã†
-0•8≈“
-"	(â	(å “
-1“
-2Jåç02Ñ0!0 Hó “
-A£
-ô(√!õB§ù
-û(é†
-0•8≈“
-"	(ä	(è “
-1“
-2J:÷02
-à0∞Hó “
-!	(’( J0œ0(Hó “
-!	(œ(. J9ë02	œ0(Hó “
-!	(ê( J0Æ08Hó “
-!	(Æ(. J9ì02	Æ08Hó “
-!	(í( J5Ñ0!0 Hó “
-"	(Ñ	(î J>ñ02Ñ0!0 Hó “
-"	(ï	(Ì J0ç0Hó “
-!	(ç(. J9è02	ç0Hó “
-!	(é( J0ó0Hó “
-!	(ó(. J9ô02	ó0Hó “
-!	(ò( J/ö0DHó “
-"	(ö	(ÿ J8ù02õ0DHó “
-"	(ú	(– J1ü0øHó “
-!	(ü(. JH¢0¿00âj`¡Hó “
-"	(¢	(£ JQ¶02 ¢0¿00âj`¡Hó “
-"	(§	(• Jç«02ª	0©0 Hó “
-A£
-ô(√!õB§ù
-û(ß†
-0•8≈“
-"	(ø	(∆ “
-1“
-2Jâ…02¡0´Hó “
-A£
-ô(√!õB§ù
-û(®†
-0•8≈“
-"	(¬	(§ “
-1“
-2J|0Hó “
-A£
-ô(√!õB§ù
-û(©†
-0•8≈“
- ((. “
-1“
-2Rdœ0(220(8«@«XÜä!	(œ(. í!	(ê( RdÆ0822088«@«XÜä!	(Æ(. í!	(í( RnÑ0!0 220!0 8«@«XÜä"	(Ñ	(î í"	(ï	(Ì Rdç02208«@«XÜä!	(ç(. í!	(é( Rdó02208«@«XÜä!	(ó(. í!	(ò( Rbõ0D220D8«@«XÜä"	(ö	(ÿ í"	(ú	(– R1ü0ø8«ä!	(ü(. Rî¢0¿00âj`¡220¿00âj`¡8«@«XÜä"	(¢	(£ í"	(§	(• “
-“
-	"Ü¬20Ω2	00≠B"Œ√20ØBJ1ê0øHó “
-!	(ê(. Jâ£0ø2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0øHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"øø À20=:ÀB“
-™	Ω	æ(J0´0(Hó “
-!	(´(. J:¨00Hó “
-!	(¨(. J1Æ0ƒHó “
-!	(Æ(. J2Ø0CHó “
-!	(Ø(. J:∞00Hó “
-!	(∞(. J0±0(Hó “
-!	(±(. J}0øHó “
-A£
-ô(√!õB§ù
-û(≤†
-0•8≈“
- ((. “
-1“
-2R0´0(8«ä!	(´(. R:¨008«ä!	(¨(. R1Æ0ƒ8«ä!	(Æ(. R2Ø0C8«ä!	(Ø(. R:∞008«ä!	(∞(. R0±0(8«ä!	(±(. “
-“
-	"Ü≈20√2
-0ø0≠B"Œ∆20ØBJ1ê0ƒHó “
-!	(ê(. Jâ£0ƒ2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0ƒHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"Áƒ À20=:ÀB“
-™	Ω	æ(J.±0(Hó “
-!	(±(. J:¥00Hó “
-!	(¥(. J0µ0(Hó “
-!	(µ(. J0∂0(Hó “
-!	(∂(. J0∑0(Hó “
-!	(∑(. J0∏0(Hó “
-!	(∏(. J0£0Hó “
-!	(£(. J3π0Ij`LHó “
-"	(π	(˛ J:∞00Hó “
-!	(∞(. J}0ƒHó “
-A£
-ô(√!õB§ù
-û(∫†
-0•8≈“
- ((. “
-1“
-2R.±0(8«ä!	(±(. R:¥008«ä!	(¥(. R0µ0(8«ä!	(µ(. R0∂0(8«ä!	(∂(. R0∑0(8«ä!	(∑(. R0∏0(8«ä!	(∏(. R0£08«ä!	(£(. R3π0Ij`L8«ä"	(π	(˛ R:∞008«ä!	(∞(. “
-“
-	"Ü«20∆2
-0ƒ0≠B"”»20Ø20≥BJ1ê0¿Hó “
-!	(ê(. Jâ£0¿2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0¿Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"∂¿ À20=20¥:ÀB“
-™	Ω	æ(J5æ0…j` Hó “
-"	(æ	(ø J,20HHó “
- (2(. J.¿0(Hó “
-!	(¿(. J}0¿Hó “
-A£
-ô(√!õB§ù
-û(¡†
-0•8≈“
- ((. “
-1“
-2JL˘02ï
-0¢j`∂0üHó “
-"	(¯	(ó “
-2R5æ0…j` 8«ä"	(æ	(ø R,20H8«ä (2(. R.¿0(8«ä!	(¿(. “
-“
-	"ÜÀ20»2
-0¿0≠B"æÃ20Ø20"BJm∆02œ0(2
-à0∞2'‰"0)000çj`ÕHó “
-"	(ƒ	(≈ J0ê0)Hó “
-!	(ê(. Jà£0)2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§0)Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"©) À20=20#:ÀB“
-™	Ω	æ(JS 0D2Æ082£00Œ0üHó “
-"	(»	(… J7∞02Æ08Hó “
-!	(Ø( J.œ0(Hó “
-!	(œ(. J/ü0øHó “
-!	(ü(. JH¢0¿00âj`¡Hó “
-"	(¢	(£ JQ¶02 ¢0¿00âj`¡Hó “
-"	(§	(• J|0)Hó “
-A£
-ô(√!õB§ù
-û(À†
-0•8≈“
- ((. “
-1“
-2J.R0$Hó “
- (R(. J6T02R0$Hó “
- (S( J:œ0D2	Ã0Hó “
-"	(Õ	(Œ J2—0œHó “
-"	(—	(Â JM◊02‘0–0üj`—Hó “
-"	(’	(÷ JX◊02‘0–0üj`—2	ÿ0Hó “
-"	(Ÿ	(⁄ Jc◊02‘0–0üj`—2	ÿ02	€0Hó “
-"	(‹	(› J/ﬁ0DHó “
-"	(ﬁ	(ÿ J;·0D2
-‡0œHó “
-"	(ﬂ	(‡ J;„0D2
-‡0œHó “
-"	(‚	(‡ J;È0D2
-Á0‘Hó “
-"	(Ë	(Œ JKÏ0D2‘0–0üj`—Hó “
-"	(Í	(Î J5Ô0’j`÷Hó “
-"	(Ô	( J2Ò0œHó “
-"	(Ò	(Â J0Ú0(Hó “
-!	(Ú(. J0ÿ0(Hó “
-!	(ÿ(. R.œ0(8«ä!	(œ(. R/ü0ø8«ä!	(ü(. Rî¢0¿00âj`¡220¿00âj`¡8«@«XÜä"	(¢	(£ í"	(§	(• “
-“
-	"Ü◊20Ã2	0)0≠B"¡ÿ20Ø20"BJn∆02œ0(2
-à0∞2(‰#0Ÿ000çj`⁄Hó “
-"	(ƒ	(≈ J}∆02œ0(2
-à0∞2˜0…j`€2(‰#0Ÿ000çj`⁄Hó “
-"	(¯	(˘ J1ê0ŸHó “
-!	(ê(. Jâ£0Ÿ2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0ŸHó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"ÀŸ À20=20#:ÀB“
-™	Ω	æ(JS 0D2Æ082£00Œ0üHó “
-"	(»	(… J7∞02Æ08Hó “
-!	(Ø( J/ü0øHó “
-!	(ü(. JH¢0¿00âj`¡Hó “
-"	(¢	(£ JQ¶02 ¢0¿00âj`¡Hó “
-"	(§	(• J}0ŸHó “
-A£
-ô(√!õB§ù
-û(˙†
-0•8≈“
- ((. “
-1“
-2J.R0$Hó “
- (R(. J6T02R0$Hó “
- (S( J:œ0D2	Ã0Hó “
-"	(Õ	(Œ J2—0œHó “
-"	(—	(Â JM◊02‘0–0üj`—Hó “
-"	(’	(÷ JX◊02‘0–0üj`—2	ÿ0Hó “
-"	(Ÿ	(⁄ Jc◊02‘0–0üj`—2	ÿ02	€0Hó “
-"	(‹	(› J/ﬁ0DHó “
-"	(ﬁ	(ÿ J;·0D2
-‡0œHó “
-"	(ﬂ	(‡ J;„0D2
-‡0œHó “
-"	(‚	(‡ J;È0D2
-Á0‘Hó “
-"	(Ë	(Œ JKÏ0D2‘0–0üj`—Hó “
-"	(Í	(Î J5Ô0’j`÷Hó “
-"	(Ô	( J2Ò0œHó “
-"	(Ò	(Â J0Ú0(Hó “
-!	(Ú(. J0ÿ0(Hó “
-!	(ÿ(. R/ü0ø8«ä!	(ü(. Rî¢0¿00âj`¡220¿00âj`¡8«@«XÜä"	(¢	(£ í"	(§	(• “
-“
-	"Ü‹20ÿ2
-0Ÿ0≠B"À›20ØBJ0ê0,Hó “
-!	(ê(. Jà£0,2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§0,Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"Ÿ, À20=:ÀB“
-™	Ω	æ(J0ç0+Hó “
-!	(ç(. J9è02	ç0+Hó “
-!	(é( J/¸0DHó “
-"	(¸	(ÿ J8˛02¸0DHó “
-"	(˝	(– J|0,Hó “
-A£
-ô(√!õB§ù
-û(ˇ†
-0•8≈“
- ((. “
-1“
-2Rdç0+220+8«@«XÜä!	(ç(. í!	(é( Rb¸0D220D8«@«XÜä"	(¸	(ÿ í"	(˝	(– “
-“
-	"Üﬁ20›2	0,0≠B"Àﬂ20ØBJ0ê03Hó “
-!	(ê(. Jà£032ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Jt§03Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"Å3 À20=:ÀB“
-™	Ω	æ(J4·0CHó “
-!	(·(. J<Å00Hó “
-!	(Å(. J/Ç0DHó “
-"	(Ç	(ÿ J|03Hó “
-A£
-ô(√!õB§ù
-û(É†
-0•8≈“
- ((. “
-1“
-2R4·0C8«ä!	(·(. R<Å008«ä!	(Å(. R/Ç0D8«ä"	(Ç	(ÿ “
-“
-	"Ü‡20ﬂ2	030≠B"“·20Ø20BJ1ê0‚Hó “
-!	(ê(. Jâ£0‚2ï0¢0üHó “
-"	(ñ	(ó “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢Ju§0‚Hó “
-!	(§(. “
-A£
-ô(ö!õB§ù
-û(ü†
-0•8¢“
-“
-	"ƒ
-‚ À20=20
-:ÀB“
-™	Ω	æ(JNà02›002Ü0(Hó “
-!	(á( JFä002Ü0(Hó “
-"	(â	(§ J/ã0Hó “
-"	(ã	(‰ J:å00Hó “
-!	(å(. J}0‚Hó “
-A£
-ô(√!õB§ù
-û(ç†
-0•8≈“
- ((. “
-1“
-2J:œ0D2	Ã0Hó “
-"	(Õ	(Œ J2—0œHó “
-"	(—	(Â JM◊02‘0–0üj`—Hó “
-"	(’	(÷ JX◊02‘0–0üj`—2	ÿ0Hó “
-"	(Ÿ	(⁄ Jc◊02‘0–0üj`—2	ÿ02	€0Hó “
-"	(‹	(› J/ﬁ0DHó “
-"	(ﬁ	(ÿ J;·0D2
-‡0œHó “
-"	(ﬂ	(‡ J;„0D2
-‡0œHó “
-"	(‚	(‡ J;È0D2
-Á0‘Hó “
-"	(Ë	(Œ JKÏ0D2‘0–0üj`—Hó “
-"	(Í	(Î J5Ô0’j`÷Hó “
-"	(Ô	( J2Ò0œHó “
-"	(Ò	(Â J0Ú0(Hó “
-!	(Ú(. J0ÿ0(Hó “
-!	(ÿ(. “
-“
-	"Ü„20·2
-0‚0≠B‡
- Í
-cocoapods.Google_Mobile_Ads_SDKÚ
-Æ
-"#%$&'*+-.549:<;>?B@EAMNPQSTUVXY[\]^_`bcfgihklmnopqrstuvxyz{|}~ÄÅÇÉÑÖÜãòôúû¨Æ±≤∞∑∏π∫ªwºΩ¬√ø≈∆ƒ«»¿ÀÃ)◊ÿŸ‹›,ﬁﬂ3‡·‚„

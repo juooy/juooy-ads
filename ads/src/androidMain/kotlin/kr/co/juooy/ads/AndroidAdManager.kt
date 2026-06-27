@@ -101,23 +101,24 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     // --- Native ads ---
 
-    fun loadNativeAd(
-        context: Context,
-        adUnitId: String = config?.nativeAdUnitId ?: "",
-        onLoaded: (NativeAd) -> Unit,
-        onFailed: ((LoadAdError) -> Unit)? = null
+    override fun loadNativeAd(
+        context: PlatformContext,
+        adUnitId: String,
+        onLoaded: (PlatformNativeAd) -> Unit,
+        onFailed: ((kr.co.juooy.ads.AdError) -> Unit)?
     ) {
         if (adUnitId.isBlank()) {
             Log.e(TAG, "nativeAdUnitId is blank")
             return
         }
         AdLoader.Builder(context, adUnitId)
-            .forNativeAd { nativeAd -> onLoaded(nativeAd) }
+            .forNativeAd { nativeAd -> onLoaded(PlatformNativeAd(nativeAd)) }
             .withAdListener(object : AdListener() {
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     Log.e(TAG, "Native ad failed: ${error.message}")
-                    listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.NATIVE))
-                    onFailed?.invoke(error)
+                    val adError = kr.co.juooy.ads.AdError(error.code, error.message, AdType.NATIVE)
+                    listener?.onAdFailed(adError)
+                    onFailed?.invoke(adError)
                 }
             })
             .withNativeAdOptions(NativeAdOptions.Builder().build())
@@ -147,9 +148,11 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     fun hasInterstitial(): Boolean = preloadedInterstitial != null
 
-    fun showInterstitial(activity: Activity, onDismissed: (() -> Unit)? = null): Boolean {
+    // PlatformContext = Activity on Android, so this satisfies both the direct API and the interface override.
+    override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
+        if (context.isFinishing || context.isDestroyed) return false
         val ad = preloadedInterstitial ?: return false
-        val appContext = activity.applicationContext
+        val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 preloadedInterstitial = null
@@ -162,7 +165,7 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
                 onDismissed?.invoke()
             }
         }
-        ad.show(activity)
+        ad.show(context)
         return true
     }
 
@@ -188,13 +191,15 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     fun hasRewarded(): Boolean = preloadedRewarded != null
 
-    fun showRewarded(
-        activity: Activity,
+    // PlatformContext = Activity on Android, so this satisfies both the direct API and the interface override.
+    override fun showRewarded(
+        context: PlatformContext,
         onUserEarnedReward: (amount: Int, type: String) -> Unit,
-        onDismissed: (() -> Unit)? = null
+        onDismissed: (() -> Unit)?
     ): Boolean {
+        if (context.isFinishing || context.isDestroyed) return false
         val ad = preloadedRewarded ?: return false
-        val appContext = activity.applicationContext
+        val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 preloadedRewarded = null
@@ -207,7 +212,7 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
                 onDismissed?.invoke()
             }
         }
-        ad.show(activity) { reward ->
+        ad.show(context) { reward ->
             listener?.onUserEarnedReward(reward.amount, reward.type)
             onUserEarnedReward(reward.amount, reward.type)
         }
@@ -215,4 +220,17 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     }
 
     override fun isInitialized(): Boolean = initialized.get()
+
+    override fun initializeWithPlatformContext(context: PlatformContext, onReady: (() -> Unit)?) {
+        initializeWithActivity(context, onReady = onReady)
+    }
+
+    @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
+    override fun initializeWithContext(context: Any, onReady: (() -> Unit)?) {
+        val activity = context as? Activity ?: run {
+            Log.w(TAG, "initializeWithContext: expected Activity, got ${context::class}")
+            return
+        }
+        initializeWithActivity(activity, onReady = onReady)
+    }
 }

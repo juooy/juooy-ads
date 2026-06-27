@@ -12,8 +12,6 @@ import cocoapods.Google_Mobile_Ads_SDK.GADNativeAdLoaderDelegateProtocol
 import cocoapods.Google_Mobile_Ads_SDK.GADRequest
 import cocoapods.Google_Mobile_Ads_SDK.GADRewardedAd
 import cocoapods.Google_Mobile_Ads_SDK.GADAdLoaderAdTypeNative
-import platform.AppTrackingTransparency.ATTrackingManager
-import platform.AppTrackingTransparency.ATTrackingManagerAuthorizationStatusNotDetermined
 import platform.Foundation.NSError
 import platform.UIKit.UIViewController
 import platform.darwin.NSObject
@@ -32,6 +30,7 @@ class IosAdManager : AdManager {
 
     private var preloadedInterstitial: GADInterstitialAd? = null
     private var preloadedRewarded: GADRewardedAd? = null
+    @Volatile private var isShowingFullScreen = false
 
     private val activeNativeLoaders = mutableListOf<GADAdLoader>()
 
@@ -42,6 +41,7 @@ class IosAdManager : AdManager {
 
     fun initializeWithViewController(
         viewController: UIViewController,
+        consentStrategy: IosConsentStrategy = AttIosConsentStrategy(),
         onReady: (() -> Unit)? = null
     ) {
         if (initCalled) {
@@ -49,16 +49,7 @@ class IosAdManager : AdManager {
             return
         }
         initCalled = true
-        requestATT { startGAD(onReady) }
-    }
-
-    private fun requestATT(onComplete: () -> Unit) {
-        val status = ATTrackingManager.trackingAuthorizationStatus
-        if (status == ATTrackingManagerAuthorizationStatusNotDetermined) {
-            ATTrackingManager.requestTrackingAuthorizationWithCompletionHandler { _ -> onComplete() }
-        } else {
-            onComplete()
-        }
+        consentStrategy.requestConsent { startGAD(onReady) }
     }
 
     private fun startGAD(onReady: (() -> Unit)?) {
@@ -101,27 +92,28 @@ class IosAdManager : AdManager {
 
     // --- Native ads ---
 
-    fun loadNativeAd(
-        viewController: UIViewController,
-        adUnitId: String = config?.nativeAdUnitId ?: "",
-        onLoaded: (GADNativeAd) -> Unit,
-        onFailed: ((NSError) -> Unit)? = null
+    override fun loadNativeAd(
+        context: PlatformContext,
+        adUnitId: String,
+        onLoaded: (PlatformNativeAd) -> Unit,
+        onFailed: ((AdError) -> Unit)?
     ) {
         if (adUnitId.isBlank()) {
             println("[$TAG] nativeAdUnitId is blank")
             return
         }
         val delegate = NativeAdLoaderDelegate(
-            onLoaded = onLoaded,
+            onLoaded = { ad -> onLoaded(PlatformNativeAd(ad)) },
             onFailed = { error ->
-                listener?.onAdFailed(AdError(error.code.toInt(), error.localizedDescription, AdType.NATIVE))
-                onFailed?.invoke(error)
+                val adError = AdError(error.code.toInt(), error.localizedDescription, AdType.NATIVE)
+                listener?.onAdFailed(adError)
+                onFailed?.invoke(adError)
             },
             onLoadFinished = { loader -> activeNativeLoaders.remove(loader) }
         )
         val loader = GADAdLoader(
             adUnitID = adUnitId,
-            rootViewController = viewController,
+            rootViewController = context,
             adTypes = listOf(GADAdLoaderAdTypeNative),
             options = null
         )
@@ -151,24 +143,26 @@ class IosAdManager : AdManager {
 
     fun hasInterstitial(): Boolean = preloadedInterstitial != null
 
-    fun showInterstitial(
-        viewController: UIViewController,
-        onDismissed: (() -> Unit)? = null
-    ): Boolean {
+    // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
+    override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
+        if (isShowingFullScreen) return false
         val ad = preloadedInterstitial ?: return false
+        isShowingFullScreen = true
         val delegate = InterstitialDelegate(
             onDismissed = {
+                isShowingFullScreen = false
                 preloadedInterstitial = null
                 preloadInterstitial()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
+                isShowingFullScreen = false
                 listener?.onAdFailed(error)
                 onDismissed?.invoke()
             }
         )
         ad.fullScreenContentDelegate = delegate
-        ad.presentFromRootViewController(viewController)
+        ad.presentFromRootViewController(context)
         return true
     }
 
@@ -193,23 +187,30 @@ class IosAdManager : AdManager {
 
     fun hasRewarded(): Boolean = preloadedRewarded != null
 
-    fun showRewarded(
-        viewController: UIViewController,
+    // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
+    override fun showRewarded(
+        context: PlatformContext,
         onUserEarnedReward: (amount: Int, type: String) -> Unit,
-        onDismissed: (() -> Unit)? = null
+        onDismissed: (() -> Unit)?
     ): Boolean {
+        if (isShowingFullScreen) return false
         val ad = preloadedRewarded ?: return false
+        isShowingFullScreen = true
         val delegate = RewardedDelegate(
             onDismissed = {
+                isShowingFullScreen = false
                 preloadedRewarded = null
                 preloadRewarded()
                 onDismissed?.invoke()
             },
-            onFailed = { error -> listener?.onAdFailed(error) }
+            onFailed = { error ->
+                isShowingFullScreen = false
+                listener?.onAdFailed(error)
+            }
         )
         ad.fullScreenContentDelegate = delegate
         val reward = ad.adReward
-        ad.presentFromRootViewController(viewController) {
+        ad.presentFromRootViewController(context) {
             listener?.onUserEarnedReward(reward.amount.intValue, reward.type)
             onUserEarnedReward(reward.amount.intValue, reward.type)
         }
@@ -217,6 +218,19 @@ class IosAdManager : AdManager {
     }
 
     override fun isInitialized(): Boolean = _isInitialized
+
+    override fun initializeWithPlatformContext(context: PlatformContext, onReady: (() -> Unit)?) {
+        initializeWithViewController(context, onReady = onReady)
+    }
+
+    @Suppress("DEPRECATION", "OVERRIDE_DEPRECATION")
+    override fun initializeWithContext(context: Any, onReady: (() -> Unit)?) {
+        val vc = context as? UIViewController ?: run {
+            println("[$TAG] initializeWithContext: expected UIViewController, got ${context::class}")
+            return
+        }
+        initializeWithViewController(vc, onReady = onReady)
+    }
 }
 
 // ---------------------------------------------------------------------------
@@ -277,6 +291,7 @@ private class NativeAdLoaderDelegate(
 
     override fun adLoader(adLoader: GADAdLoader, didReceiveNativeAd: GADNativeAd) {
         onLoaded(didReceiveNativeAd)
+        onLoadFinished(adLoader)
     }
 
     override fun adLoader(adLoader: GADAdLoader, didFailToReceiveAdWithError: NSError) {
