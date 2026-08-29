@@ -4,7 +4,8 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
-val buildIos = project.findProperty("build.ios")?.toString()?.toBoolean() ?: false
+val buildIos = project.findProperty("build.ios")?.toString()?.toBoolean()
+    ?: System.getProperty("os.name").contains("Mac", ignoreCase = true)
 
 if (buildIos) {
     apply(plugin = "org.jetbrains.kotlin.native.cocoapods")
@@ -79,7 +80,7 @@ kotlin {
 
 android {
     namespace = "kr.co.juooy.ads"
-    compileSdk = 36
+    compileSdk = 37
     defaultConfig {
         minSdk = 26
     }
