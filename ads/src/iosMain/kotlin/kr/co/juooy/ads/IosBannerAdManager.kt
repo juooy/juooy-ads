@@ -25,6 +25,8 @@ import platform.darwin.NSObject
  */
 class IosBannerAdManager(private val adManager: IosAdManager) {
 
+    private val activeDelegates = mutableMapOf<GADBannerView, BannerDelegate>()
+
     fun loadBannerAd(
         viewController: UIViewController,
         adUnitId: String = adManager.config?.bannerAdUnitId ?: "",
@@ -34,9 +36,15 @@ class IosBannerAdManager(private val adManager: IosAdManager) {
         val bannerView = GADBannerView()
         bannerView.adUnitID = adUnitId
         bannerView.rootViewController = viewController
-        bannerView.delegate = BannerDelegate(onLoaded = onLoaded, onFailed = onFailed)
+        val delegate = BannerDelegate(onLoaded = onLoaded, onFailed = onFailed)
+        activeDelegates[bannerView] = delegate
+        bannerView.delegate = delegate
         bannerView.loadRequest(GADRequest())
         return bannerView
+    }
+
+    fun removeBannerAd(view: GADBannerView) {
+        activeDelegates.remove(view)
     }
 }
 
