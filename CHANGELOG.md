@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0.2] - 2026-09-28
+
+### Fixed
+- iOS full-screen and native ad delegates: manager now holds strong references — GAD delegate properties are `weak`, so without this the delegate deallocates before callbacks fire (silent ad-event loss)
+- `IosBannerAdManager`: banner delegates retained in a map; consumers should call `removeBannerAd(view)` when the banner is torn down
+- `NativeAdLoaderDelegate`: only remove loader from `activeNativeLoaders` on `adLoaderDidFinishLoading` (previously removed twice on success/fail path)
+- `PlatformNativeAd.destroy()` on iOS: SDK 10.x `GADNativeAd` has no `destroy()` — cleanup left to ARC (previous release incorrectly claimed to call it)
+
+### Changed
+- iOS state flags no longer marked `@Volatile` — Kotlin/Native new memory model + iOS main-thread invariant makes it unnecessary
+
 ## [1.1.0.1] - 2026-06-27
 
 ### Fixed

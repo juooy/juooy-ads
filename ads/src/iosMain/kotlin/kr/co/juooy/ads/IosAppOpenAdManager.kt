@@ -26,12 +26,13 @@ private const val AD_EXPIRY_MS = 4L * 60L * 60L * 1000L // 4 hours in ms
 class IosAppOpenAdManager(
     private val adManager: IosAdManager
 ) {
-    @Volatile private var appOpenAd: GADAppOpenAd? = null
-    @Volatile internal var loadTimeMs: Long = 0L
-    @Volatile private var isShowingAd = false
-    @Volatile private var isLoadingAd = false
+    private var appOpenAd: GADAppOpenAd? = null
+    internal var loadTimeMs: Long = 0L
+    private var isShowingAd = false
+    private var isLoadingAd = false
 
     var isAdSuppressed: Boolean = false
+    private var activeDelegate: AppOpenDelegate? = null
 
     fun loadAd(adUnitId: String = adManager.config?.openAdUnitId ?: "") {
         if (adUnitId.isBlank()) return
@@ -74,16 +75,19 @@ class IosAppOpenAdManager(
             onDismissed = {
                 appOpenAd = null
                 isShowingAd = false
+                activeDelegate = null
                 loadAd()
                 onDismissed?.invoke()
             },
             onFailed = {
                 appOpenAd = null
                 isShowingAd = false
+                activeDelegate = null
                 loadAd()
                 println("[$TAG] App open ad failed to show: ${it.localizedDescription}")
             }
         )
+        activeDelegate = delegate
         ad.fullScreenContentDelegate = delegate
         isShowingAd = true
         ad.presentFromRootViewController(viewController)

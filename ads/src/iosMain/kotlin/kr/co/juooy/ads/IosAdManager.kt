@@ -30,9 +30,11 @@ class IosAdManager : AdManager {
 
     private var preloadedInterstitial: GADInterstitialAd? = null
     private var preloadedRewarded: GADRewardedAd? = null
-    @Volatile private var isShowingFullScreen = false
+    private var isShowingFullScreen = false
 
-    private val activeNativeLoaders = mutableListOf<GADAdLoader>()
+    private var activeInterstitialDelegate: InterstitialDelegate? = null
+    private var activeRewardedDelegate: RewardedDelegate? = null
+    private val activeNativeLoaders = mutableMapOf<GADAdLoader, NativeAdLoaderDelegate>()
 
     override fun initialize(config: AdConfig, listener: AdEventListener?) {
         this.config = config
@@ -118,7 +120,7 @@ class IosAdManager : AdManager {
             options = null
         )
         loader.delegate = delegate
-        activeNativeLoaders.add(loader)
+        activeNativeLoaders[loader] = delegate
         loader.loadRequest(GADRequest())
     }
 
@@ -151,16 +153,19 @@ class IosAdManager : AdManager {
         val delegate = InterstitialDelegate(
             onDismissed = {
                 isShowingFullScreen = false
+                activeInterstitialDelegate = null
                 preloadedInterstitial = null
                 preloadInterstitial()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
                 isShowingFullScreen = false
+                activeInterstitialDelegate = null
                 listener?.onAdFailed(error)
                 onDismissed?.invoke()
             }
         )
+        activeInterstitialDelegate = delegate
         ad.fullScreenContentDelegate = delegate
         ad.presentFromRootViewController(context)
         return true
@@ -199,15 +204,18 @@ class IosAdManager : AdManager {
         val delegate = RewardedDelegate(
             onDismissed = {
                 isShowingFullScreen = false
+                activeRewardedDelegate = null
                 preloadedRewarded = null
                 preloadRewarded()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
                 isShowingFullScreen = false
+                activeRewardedDelegate = null
                 listener?.onAdFailed(error)
             }
         )
+        activeRewardedDelegate = delegate
         ad.fullScreenContentDelegate = delegate
         val reward = ad.adReward
         ad.presentFromRootViewController(context) {
@@ -291,12 +299,10 @@ private class NativeAdLoaderDelegate(
 
     override fun adLoader(adLoader: GADAdLoader, didReceiveNativeAd: GADNativeAd) {
         onLoaded(didReceiveNativeAd)
-        onLoadFinished(adLoader)
     }
 
     override fun adLoader(adLoader: GADAdLoader, didFailToReceiveAdWithError: NSError) {
         onFailed(didFailToReceiveAdWithError)
-        onLoadFinished(adLoader)
     }
 
     override fun adLoaderDidFinishLoading(adLoader: GADAdLoader) {
