@@ -61,7 +61,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {}
         androidMain.dependencies {
-            implementation("com.google.android.gms:play-services-ads:24.4.0")
+            implementation("com.google.android.gms:play-services-ads:25.0.0")
             implementation("com.google.android.ump:user-messaging-platform:3.2.0")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
             implementation("androidx.compose.ui:ui:1.7.8")
