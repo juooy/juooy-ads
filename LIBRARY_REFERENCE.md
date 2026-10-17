@@ -32,6 +32,10 @@ interface AdEventListener {
     fun onAdFailed(error: AdError) {}
     fun onUserEarnedReward(amount: Int, rewardType: String) {}
     fun onAdRevenuePaid(value: Double, currencyCode: String) {}
+    // 전면(전면/보상형) 광고 — 화면 덮기 직전, 클릭, 로드됐지만 노출 실패
+    fun onAdShown(type: AdType) {}
+    fun onAdClicked(type: AdType) {}
+    fun onAdFailedToShow(error: AdError) {}  // onAdFailed 도 함께 호출됨
 }
 ```
 
@@ -100,6 +104,8 @@ AdManagerProvider.set(adManager)
 
 ```kotlin
 // ConsentStrategy 기본값 = UmpConsentStrategy (GDPR UMP)
+// 동의 정보 갱신 자체가 실패(AdMob 개인정보 메시지 미설정·오프라인)해 상태가 UNKNOWN이면 SDK 초기화를 진행한다.
+// 상태가 확정됐는데 광고 불가(동의 필요·미동의)면 초기화하지 않는다. 출시 전 AdMob 콘솔에 GDPR 메시지를 만들 것.
 adManager.initializeWithActivity(
     activity = this,
     consentStrategy = UmpConsentStrategy(),  // 테스트: NoOpConsentStrategy()
@@ -159,12 +165,20 @@ adManager.loadNativeAd(
     context = activity,
     adUnitId = "ca-app-pub-xxx/yyy",
     onLoaded = { platformNativeAd ->
-        val nativeAd = platformNativeAd.nativeAd  // com.google.android.gms.ads.nativead.NativeAd
-        // NativeAdView에 바인딩 후 표시
+        // 기본 카드 레이아웃(juooy_ads_native_medium)으로 렌더링
+        val adView = NativeAdViewBinder.inflate(container)
+        container.addView(adView)
+        NativeAdViewBinder.bind(adView, platformNativeAd)
+        // 직접 그리려면 platformNativeAd.nativeAd (com.google.android.gms.ads.nativead.NativeAd) 사용
     },
     onFailed = { error -> }
 )
+// 화면 종료 시 platformNativeAd.destroy()
 ```
+
+- 레이아웃은 XML `<include layout="@layout/juooy_ads_native_medium" />`로 넣고 `bind(findViewById(R.id.juooy_ads_native_ad_view), ad)`도 가능
+- 리소스는 `juooy_ads_` 접두어. 배지 문구는 `juooy_ads_badge`(en "Ad" / ko "광고") — 앱에서 같은 이름으로 덮어쓰기 가능
+- `onReady`는 init 진행 중 여러 번 호출돼도 큐에 쌓였다가 한 번씩 실행된다 (Base Activity + 하위 Activity 동시 호출 안전)
 
 ---
 
@@ -254,8 +268,13 @@ adManager.loadNativeAd(
     context: self,
     adUnitId: "ca-app-pub-xxx/yyy",
     onLoaded: { platformNativeAd in
-        let gadNativeAd = platformNativeAd.gadNativeAd  // GADNativeAd
-        // GADNativeAdView에 바인딩 후 표시
+        // 기본 카드 뷰 (Dynamic Type 폰트)
+        let adView = IosNativeAdViewFactory.shared.createNativeAdView(
+            ad: platformNativeAd,
+            badgeText: NSLocalizedString("ad_badge", comment: "")
+        )
+        stackView.addArrangedSubview(adView)
+        // 직접 그리려면 platformNativeAd.gadNativeAd (GADNativeAd) 사용
     },
     onFailed: { error in }
 )

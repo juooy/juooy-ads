@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- White on grey 616161 = 6.2:1 contrast (WCAG AA) -->
+    <color name="juooy_ads_badge_bg">#FF616161</color>
+    <color name="juooy_ads_badge_text">#FFFFFFFF</color>
+</resources>

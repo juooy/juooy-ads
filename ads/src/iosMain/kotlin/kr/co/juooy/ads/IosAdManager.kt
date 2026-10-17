@@ -27,8 +27,10 @@ class IosAdManager : AdManager {
 
     private var initCalled = false
     private var _isInitialized = false
+    private val readyGate = ReadyGate()
 
     private var preloadedInterstitial: GADInterstitialAd? = null
+    private var isLoadingInterstitial = false
     private var preloadedRewarded: GADRewardedAd? = null
     private var isShowingFullScreen = false
 
@@ -46,19 +48,18 @@ class IosAdManager : AdManager {
         consentStrategy: IosConsentStrategy = AttIosConsentStrategy(),
         onReady: (() -> Unit)? = null
     ) {
-        if (initCalled) {
-            if (_isInitialized) onReady?.invoke()
-            return
-        }
-        initCalled = true
-        consentStrategy.requestConsent { startGAD(onReady) }
-    }
-
-    private fun startGAD(onReady: (() -> Unit)?) {
         val cfg = config ?: run {
             println("[$TAG] initialize(AdConfig) must be called before initializeWithViewController()")
             return
         }
+        // Queue before the initCalled check: a second caller during in-flight init must not lose onReady
+        readyGate.await(onReady)
+        if (initCalled) return
+        initCalled = true
+        consentStrategy.requestConsent { startGAD(cfg) }
+    }
+
+    private fun startGAD(cfg: AdConfig) {
 
         if (cfg.isTestMode) {
             GADMobileAds.sharedInstance().requestConfiguration.testDeviceIdentifiers =
@@ -74,7 +75,7 @@ class IosAdManager : AdManager {
                 readyFired = true
                 println("[$TAG] GADMobileAds.start timed out after 5s")
                 listener?.onAdFailed(AdError(-2, "GADMobileAds start timed out", AdType.BANNER))
-                onReady?.invoke()
+                readyGate.open()
             }
         }
 
@@ -85,7 +86,7 @@ class IosAdManager : AdManager {
                 _isInitialized = true
                 println("[$TAG] GADMobileAds initialized")
                 listener?.onAdLoaded(AdType.BANNER)
-                onReady?.invoke()
+                readyGate.open()
                 preloadInterstitial()
                 preloadRewarded()
             }
@@ -127,11 +128,14 @@ class IosAdManager : AdManager {
     // --- Interstitial ads ---
 
     fun preloadInterstitial() {
-        val adUnitId = config?.interstitialAdUnitId ?: return
+        val adUnitId = config?.interstitialAdUnitId?.takeIf { it.isNotBlank() } ?: return
+        if (preloadedInterstitial != null || isLoadingInterstitial) return
+        isLoadingInterstitial = true
         GADInterstitialAd.loadWithAdUnitID(
             adUnitID = adUnitId,
             request = GADRequest()
         ) { ad, error ->
+            isLoadingInterstitial = false
             if (ad != null) {
                 preloadedInterstitial = ad
                 listener?.onAdLoaded(AdType.INTERSTITIAL)
@@ -148,9 +152,15 @@ class IosAdManager : AdManager {
     // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
     override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
         if (isShowingFullScreen) return false
-        val ad = preloadedInterstitial ?: return false
+        val ad = preloadedInterstitial ?: run {
+            // A failed preload (e.g. offline at launch) is otherwise never retried in-process
+            if (_isInitialized) preloadInterstitial()
+            return false
+        }
         isShowingFullScreen = true
         val delegate = InterstitialDelegate(
+            onShown = { listener?.onAdShown(AdType.INTERSTITIAL) },
+            onClicked = { listener?.onAdClicked(AdType.INTERSTITIAL) },
             onDismissed = {
                 isShowingFullScreen = false
                 activeInterstitialDelegate = null
@@ -161,6 +171,9 @@ class IosAdManager : AdManager {
             onFailed = { error ->
                 isShowingFullScreen = false
                 activeInterstitialDelegate = null
+                preloadedInterstitial = null
+                preloadInterstitial()
+                listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
                 onDismissed?.invoke()
             }
@@ -174,7 +187,7 @@ class IosAdManager : AdManager {
     // --- Rewarded ads ---
 
     fun preloadRewarded() {
-        val adUnitId = config?.rewardedAdUnitId ?: return
+        val adUnitId = config?.rewardedAdUnitId?.takeIf { it.isNotBlank() } ?: return
         GADRewardedAd.loadWithAdUnitID(
             adUnitID = adUnitId,
             request = GADRequest()
@@ -202,6 +215,8 @@ class IosAdManager : AdManager {
         val ad = preloadedRewarded ?: return false
         isShowingFullScreen = true
         val delegate = RewardedDelegate(
+            onShown = { listener?.onAdShown(AdType.REWARDED) },
+            onClicked = { listener?.onAdClicked(AdType.REWARDED) },
             onDismissed = {
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
@@ -212,6 +227,7 @@ class IosAdManager : AdManager {
             onFailed = { error ->
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
+                listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
             }
         )
@@ -246,9 +262,19 @@ class IosAdManager : AdManager {
 // ---------------------------------------------------------------------------
 
 private class InterstitialDelegate(
+    private val onShown: () -> Unit,
+    private val onClicked: () -> Unit,
     private val onDismissed: () -> Unit,
     private val onFailed: (AdError) -> Unit
 ) : NSObject(), GADFullScreenContentDelegateProtocol {
+
+    override fun adWillPresentFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
+        onShown()
+    }
+
+    override fun adDidRecordClick(ad: GADFullScreenPresentingAdProtocol) {
+        onClicked()
+    }
 
     override fun adDidDismissFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
         onDismissed()
@@ -269,9 +295,19 @@ private class InterstitialDelegate(
 }
 
 private class RewardedDelegate(
+    private val onShown: () -> Unit,
+    private val onClicked: () -> Unit,
     private val onDismissed: () -> Unit,
     private val onFailed: (AdError) -> Unit
 ) : NSObject(), GADFullScreenContentDelegateProtocol {
+
+    override fun adWillPresentFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
+        onShown()
+    }
+
+    override fun adDidRecordClick(ad: GADFullScreenPresentingAdProtocol) {
+        onClicked()
+    }
 
     override fun adDidDismissFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
         onDismissed()
