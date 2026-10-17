@@ -8,11 +8,13 @@ All notable changes to this project will be documented in this file.
 - `NativeAdViewBinder` (Android): `inflate(parent)` + `bind(adView, ad)` render a `PlatformNativeAd` into the bundled `juooy_ads_native_medium` layout (`NativeAdView` with badge, icon, headline, body, `MediaView`, CTA). Replaces per-app copies and the old `nativetemplates` `TemplateView`
 - `IosNativeAdViewFactory` (iOS): `createNativeAdView(ad, badgeText)` returns a bound `GADNativeAdView` built in code with Dynamic Type fonts
 - Android resources (`juooy_ads_*` prefix): layout, badge string (en/ko), badge colors
+- `AdEventListener.onAdShown` / `onAdClicked` / `onAdFailedToShow` (default no-op) for interstitial and rewarded, both platforms
 
 ### Fixed
 - `initializeWithActivity` / `initializeWithViewController`: a second caller while init was still in flight (e.g. base Activity + subclass) silently lost its `onReady`. Callbacks are now queued and fire once when init settles (success, consent failure or timeout)
 - `initializeWithActivity` / `initializeWithViewController` called before `initialize(AdConfig)` no longer blocks every later call
 - `preloadInterstitial` / `preloadRewarded` skip blank ad unit IDs instead of issuing a failing load
+- `UmpConsentStrategy`: when the consent info update itself fails (no privacy message configured in AdMob, offline) and status is still `UNKNOWN`, the SDK now initializes. Before, interstitial/rewarded never preloaded in that state. A determined status that disallows ads still blocks
 - Interstitial: a failed preload (e.g. offline at launch) was never retried. `showInterstitial` now starts a reload when nothing is cached (after init), and a show failure clears the stale ad and reloads. Concurrent preloads are deduplicated
 - iOS `AttIosConsentStrategy`: ATT completion runs on a background queue, so SDK start and its timeout `NSTimer` ran off-main (the timeout never fired). `onComplete` now hops to the main queue
 

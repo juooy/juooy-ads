@@ -162,6 +162,14 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         }
         val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdShowedFullScreenContent() {
+                listener?.onAdShown(AdType.INTERSTITIAL)
+            }
+
+            override fun onAdClicked() {
+                listener?.onAdClicked(AdType.INTERSTITIAL)
+            }
+
             override fun onAdDismissedFullScreenContent() {
                 preloadedInterstitial = null
                 preloadInterstitial(appContext)
@@ -171,7 +179,9 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
                 preloadedInterstitial = null
                 preloadInterstitial(appContext)
-                listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.INTERSTITIAL))
+                val adError = kr.co.juooy.ads.AdError(error.code, error.message, AdType.INTERSTITIAL)
+                listener?.onAdFailedToShow(adError)
+                listener?.onAdFailed(adError)
                 onDismissed?.invoke()
             }
         }
@@ -211,6 +221,14 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         val ad = preloadedRewarded ?: return false
         val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdShowedFullScreenContent() {
+                listener?.onAdShown(AdType.REWARDED)
+            }
+
+            override fun onAdClicked() {
+                listener?.onAdClicked(AdType.REWARDED)
+            }
+
             override fun onAdDismissedFullScreenContent() {
                 preloadedRewarded = null
                 preloadRewarded(appContext)
@@ -218,7 +236,9 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             }
 
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
-                listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.REWARDED))
+                val adError = kr.co.juooy.ads.AdError(error.code, error.message, AdType.REWARDED)
+                listener?.onAdFailedToShow(adError)
+                listener?.onAdFailed(adError)
                 onDismissed?.invoke()
             }
         }

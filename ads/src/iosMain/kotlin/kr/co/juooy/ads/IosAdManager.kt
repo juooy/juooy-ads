@@ -159,6 +159,8 @@ class IosAdManager : AdManager {
         }
         isShowingFullScreen = true
         val delegate = InterstitialDelegate(
+            onShown = { listener?.onAdShown(AdType.INTERSTITIAL) },
+            onClicked = { listener?.onAdClicked(AdType.INTERSTITIAL) },
             onDismissed = {
                 isShowingFullScreen = false
                 activeInterstitialDelegate = null
@@ -171,6 +173,7 @@ class IosAdManager : AdManager {
                 activeInterstitialDelegate = null
                 preloadedInterstitial = null
                 preloadInterstitial()
+                listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
                 onDismissed?.invoke()
             }
@@ -212,6 +215,8 @@ class IosAdManager : AdManager {
         val ad = preloadedRewarded ?: return false
         isShowingFullScreen = true
         val delegate = RewardedDelegate(
+            onShown = { listener?.onAdShown(AdType.REWARDED) },
+            onClicked = { listener?.onAdClicked(AdType.REWARDED) },
             onDismissed = {
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
@@ -222,6 +227,7 @@ class IosAdManager : AdManager {
             onFailed = { error ->
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
+                listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
             }
         )
@@ -256,9 +262,19 @@ class IosAdManager : AdManager {
 // ---------------------------------------------------------------------------
 
 private class InterstitialDelegate(
+    private val onShown: () -> Unit,
+    private val onClicked: () -> Unit,
     private val onDismissed: () -> Unit,
     private val onFailed: (AdError) -> Unit
 ) : NSObject(), GADFullScreenContentDelegateProtocol {
+
+    override fun adWillPresentFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
+        onShown()
+    }
+
+    override fun adDidRecordClick(ad: GADFullScreenPresentingAdProtocol) {
+        onClicked()
+    }
 
     override fun adDidDismissFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
         onDismissed()
@@ -279,9 +295,19 @@ private class InterstitialDelegate(
 }
 
 private class RewardedDelegate(
+    private val onShown: () -> Unit,
+    private val onClicked: () -> Unit,
     private val onDismissed: () -> Unit,
     private val onFailed: (AdError) -> Unit
 ) : NSObject(), GADFullScreenContentDelegateProtocol {
+
+    override fun adWillPresentFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
+        onShown()
+    }
+
+    override fun adDidRecordClick(ad: GADFullScreenPresentingAdProtocol) {
+        onClicked()
+    }
 
     override fun adDidDismissFullScreenContent(ad: GADFullScreenPresentingAdProtocol) {
         onDismissed()

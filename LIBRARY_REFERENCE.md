@@ -32,6 +32,10 @@ interface AdEventListener {
     fun onAdFailed(error: AdError) {}
     fun onUserEarnedReward(amount: Int, rewardType: String) {}
     fun onAdRevenuePaid(value: Double, currencyCode: String) {}
+    // 전면(전면/보상형) 광고 — 화면 덮기 직전, 클릭, 로드됐지만 노출 실패
+    fun onAdShown(type: AdType) {}
+    fun onAdClicked(type: AdType) {}
+    fun onAdFailedToShow(error: AdError) {}  // onAdFailed 도 함께 호출됨
 }
 ```
 
@@ -100,6 +104,8 @@ AdManagerProvider.set(adManager)
 
 ```kotlin
 // ConsentStrategy 기본값 = UmpConsentStrategy (GDPR UMP)
+// 동의 정보 갱신 자체가 실패(AdMob 개인정보 메시지 미설정·오프라인)해 상태가 UNKNOWN이면 SDK 초기화를 진행한다.
+// 상태가 확정됐는데 광고 불가(동의 필요·미동의)면 초기화하지 않는다. 출시 전 AdMob 콘솔에 GDPR 메시지를 만들 것.
 adManager.initializeWithActivity(
     activity = this,
     consentStrategy = UmpConsentStrategy(),  // 테스트: NoOpConsentStrategy()

@@ -22,6 +22,9 @@ import platform.UIKit.UIStackViewAlignmentLeading
 import platform.UIKit.UIStackViewAlignmentTop
 import platform.UIKit.UIView
 import platform.UIKit.UIViewContentMode
+import platform.UIKit.labelColor
+import platform.UIKit.secondaryLabelColor
+import platform.UIKit.systemBackgroundColor
 
 /**
  * Factory for a medium native ad card — iOS counterpart of Android `NativeAdViewBinder`.
