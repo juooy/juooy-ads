@@ -159,12 +159,20 @@ adManager.loadNativeAd(
     context = activity,
     adUnitId = "ca-app-pub-xxx/yyy",
     onLoaded = { platformNativeAd ->
-        val nativeAd = platformNativeAd.nativeAd  // com.google.android.gms.ads.nativead.NativeAd
-        // NativeAdView에 바인딩 후 표시
+        // 기본 카드 레이아웃(juooy_ads_native_medium)으로 렌더링
+        val adView = NativeAdViewBinder.inflate(container)
+        container.addView(adView)
+        NativeAdViewBinder.bind(adView, platformNativeAd)
+        // 직접 그리려면 platformNativeAd.nativeAd (com.google.android.gms.ads.nativead.NativeAd) 사용
     },
     onFailed = { error -> }
 )
+// 화면 종료 시 platformNativeAd.destroy()
 ```
+
+- 레이아웃은 XML `<include layout="@layout/juooy_ads_native_medium" />`로 넣고 `bind(findViewById(R.id.juooy_ads_native_ad_view), ad)`도 가능
+- 리소스는 `juooy_ads_` 접두어. 배지 문구는 `juooy_ads_badge`(en "Ad" / ko "광고") — 앱에서 같은 이름으로 덮어쓰기 가능
+- `onReady`는 init 진행 중 여러 번 호출돼도 큐에 쌓였다가 한 번씩 실행된다 (Base Activity + 하위 Activity 동시 호출 안전)
 
 ---
 
@@ -254,8 +262,13 @@ adManager.loadNativeAd(
     context: self,
     adUnitId: "ca-app-pub-xxx/yyy",
     onLoaded: { platformNativeAd in
-        let gadNativeAd = platformNativeAd.gadNativeAd  // GADNativeAd
-        // GADNativeAdView에 바인딩 후 표시
+        // 기본 카드 뷰 (Dynamic Type 폰트)
+        let adView = IosNativeAdViewFactory.shared.createNativeAdView(
+            ad: platformNativeAd,
+            badgeText: NSLocalizedString("ad_badge", comment: "")
+        )
+        stackView.addArrangedSubview(adView)
+        // 직접 그리려면 platformNativeAd.gadNativeAd (GADNativeAd) 사용
     },
     onFailed: { error in }
 )

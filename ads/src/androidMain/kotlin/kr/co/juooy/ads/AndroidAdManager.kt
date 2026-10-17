@@ -36,8 +36,10 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     private var listener: AdEventListener? = null
     private val initCalled = AtomicBoolean(false)
     private val initialized = AtomicBoolean(false)
+    private val readyGate = ReadyGate()
 
     private var preloadedInterstitial: InterstitialAd? = null
+    private val isLoadingInterstitial = AtomicBoolean(false)
     private var preloadedRewarded: RewardedAd? = null
 
     override fun initialize(config: AdConfig, listener: AdEventListener?) {
@@ -50,25 +52,24 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         consentStrategy: ConsentStrategy = UmpConsentStrategy(),
         onReady: (() -> Unit)? = null
     ) {
-        if (initCalled.getAndSet(true)) {
-            if (initialized.get()) onReady?.invoke()
-            return
-        }
         val cfg = config ?: run {
             Log.e(TAG, "initialize(AdConfig) must be called before initializeWithActivity()")
             return
         }
+        // Queue before the initCalled check: a second caller during in-flight init must not lose onReady
+        readyGate.await(onReady)
+        if (initCalled.getAndSet(true)) return
         consentStrategy.requestConsent(
             activity = activity,
-            onSuccess = { initMobileAds(activity, cfg, onReady) },
+            onSuccess = { initMobileAds(activity, cfg) },
             onFailure = {
                 listener?.onAdFailed(kr.co.juooy.ads.AdError(-1, "Consent failed or unavailable", AdType.BANNER))
-                onReady?.invoke()
+                readyGate.open()
             }
         )
     }
 
-    private fun initMobileAds(activity: Activity, cfg: AdConfig, onReady: (() -> Unit)?) {
+    private fun initMobileAds(activity: Activity, cfg: AdConfig) {
         if (cfg.isTestMode) {
             MobileAds.setRequestConfiguration(
                 RequestConfiguration.Builder()
@@ -83,7 +84,7 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             if (!initialized.get()) {
                 Log.w(TAG, "MobileAds.initialize timed out after ${INIT_TIMEOUT_MS}ms")
                 listener?.onAdFailed(kr.co.juooy.ads.AdError(-2, "MobileAds initialization timed out", AdType.BANNER))
-                onReady?.invoke()
+                readyGate.open()
             }
         }
         MobileAds.initialize(activity) {
@@ -91,7 +92,7 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             if (initialized.getAndSet(true)) return@initialize
             Log.d(TAG, "MobileAds initialized")
             listener?.onAdLoaded(AdType.BANNER)
-            onReady?.invoke()
+            readyGate.open()
             weakActivity.get()?.let { act ->
                 preloadInterstitial(act.applicationContext)
                 preloadRewarded(act.applicationContext)
@@ -129,16 +130,19 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     // --- Interstitial ads ---
 
     fun preloadInterstitial(context: Context) {
-        val adUnitId = config?.interstitialAdUnitId ?: return
+        val adUnitId = config?.interstitialAdUnitId?.takeIf { it.isNotBlank() } ?: return
+        if (preloadedInterstitial != null || isLoadingInterstitial.getAndSet(true)) return
         InterstitialAd.load(
             context, adUnitId, AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
+                    isLoadingInterstitial.set(false)
                     preloadedInterstitial = ad
                     listener?.onAdLoaded(AdType.INTERSTITIAL)
                 }
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
+                    isLoadingInterstitial.set(false)
                     Log.e(TAG, "Interstitial failed to load: ${error.message}")
                     listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.INTERSTITIAL))
                 }
@@ -151,7 +155,11 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     // PlatformContext = Activity on Android, so this satisfies both the direct API and the interface override.
     override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
         if (context.isFinishing || context.isDestroyed) return false
-        val ad = preloadedInterstitial ?: return false
+        val ad = preloadedInterstitial ?: run {
+            // A failed preload (e.g. offline at launch) is otherwise never retried in-process
+            if (initialized.get()) preloadInterstitial(context.applicationContext)
+            return false
+        }
         val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
@@ -161,6 +169,8 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             }
 
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                preloadedInterstitial = null
+                preloadInterstitial(appContext)
                 listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.INTERSTITIAL))
                 onDismissed?.invoke()
             }
@@ -172,7 +182,7 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     // --- Rewarded ads ---
 
     fun preloadRewarded(context: Context) {
-        val adUnitId = config?.rewardedAdUnitId ?: return
+        val adUnitId = config?.rewardedAdUnitId?.takeIf { it.isNotBlank() } ?: return
         RewardedAd.load(
             context, adUnitId, AdRequest.Builder().build(),
             object : RewardedAdLoadCallback() {
