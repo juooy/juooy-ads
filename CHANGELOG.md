@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.1.0] - 2026-10-17
+
+### Changed
+- Kotlin Gradle plugins 2.2.10 → 2.4.21. Kotlin 2.2.10's cinterop (clang 19) cannot read the Xcode 27 SDK headers (`could not build module '_DarwinFoundation1'`), so the iOS targets did not compile
+- Output stays readable by consumers on Kotlin 2.2.x: `languageVersion`/`apiVersion` = 2.2, `coreLibrariesVersion` = 2.2.10. Verified with CatholicPrayForTheDead, WhatsYourName and JuooyLibrary (2.2.0–2.2.10)
+
+### Fixed
+- iOS build on Xcode 27: transitive pods of Google-Mobile-Ads-SDK declare iOS 11.0/12.0 deployment targets, which Xcode 27 rejects (min 15.0). `podInstallSyntheticIos` now raises them to 15.0 in the generated Pods project
+
 ## [1.2.0.0] - 2026-10-17
 
 ### Added
