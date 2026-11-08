@@ -71,6 +71,8 @@ kotlin {
         androidMain.dependencies {
             implementation("com.google.android.gms:play-services-ads:25.0.0")
             implementation("com.google.android.ump:user-messaging-platform:3.2.0")
+            // Mediation adapter: Pangle bidding (KR/ROW) incl. native. Requires the bytedance Maven repo in consumers
+            implementation("com.google.ads.mediation:pangle:8.4.0.5.0")
             implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
             implementation("androidx.compose.ui:ui:1.7.8")
             implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.7")

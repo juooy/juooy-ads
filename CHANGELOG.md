@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- Android: Pangle mediation adapter (`com.google.ads.mediation:pangle:8.4.0.5.0`) for AdMob bidding, including native ads (Pangle KR / ROW). Consumers must add `maven("https://artifact.bytedance.com/repository/pangle/")` to `dependencyResolutionManagement.repositories`, or dependency resolution fails
+- The adapter raises `play-services-ads` on the runtime classpath from 25.0.0 to 25.5.0 (transitive)
+
+### Not included
+- iOS Pangle adapter (pod `GoogleMobileAdsMediationPangle`) — tracked in TODOS.md
+- `PangleMediationAdapter.setPAConsent(...)` (GDPR consent forwarding) is not wired
+
 ## [1.2.1.0] - 2026-10-17
 
 ### Changed
