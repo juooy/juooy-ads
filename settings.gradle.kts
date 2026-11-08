@@ -16,8 +16,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        // Pangle SDK (pulled in by the Pangle mediation adapter) is only published here
-        maven("https://artifact.bytedance.com/repository/pangle/")
+        // Pangle SDK, pulled in by juooy-ads' Pangle mediation adapter.
+        // exclusiveContent: only com.pangle.global resolves here, and only from here
+        exclusiveContent {
+            forRepository { maven("https://artifact.bytedance.com/repository/pangle/") }
+            filter { includeGroup("com.pangle.global") }
+        }
     }
 }
 
