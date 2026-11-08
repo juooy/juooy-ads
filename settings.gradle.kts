@@ -16,6 +16,8 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        // Pangle SDK (pulled in by the Pangle mediation adapter) is only published here
+        maven("https://artifact.bytedance.com/repository/pangle/")
     }
 }
 
