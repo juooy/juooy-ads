@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 - Android: Pangle mediation adapter (`com.google.ads.mediation:pangle:8.4.0.5.0`) for AdMob bidding, including native ads (Pangle KR / ROW). Consumers must add `maven("https://artifact.bytedance.com/repository/pangle/")` to `dependencyResolutionManagement.repositories`, or dependency resolution fails
 - The adapter raises `play-services-ads` on the runtime classpath from 25.0.0 to 25.5.0 (transitive)
 
+### Fixed
+- Interstitial and rewarded ads older than 1 hour are now dropped and reloaded (Android, iOS). Google pays only for valid impressions, and these formats expire after 1 hour. `hasInterstitial` / `hasRewarded` return false for an expired ad and start a reload
+- Rewarded: concurrent preloads are deduplicated, `showRewarded` starts a reload when nothing is cached, and a failed show clears the ad and reloads (Android, iOS). iOS `showRewarded` now calls `onDismissed` when the show fails, matching Android
+
 ### Not included
 - iOS Pangle adapter (pod `GoogleMobileAdsMediationPangle`) — tracked in TODOS.md
 - `PangleMediationAdapter.setPAConsent(...)` (GDPR consent forwarding) is not wired

@@ -12,11 +12,15 @@ import cocoapods.Google_Mobile_Ads_SDK.GADNativeAdLoaderDelegateProtocol
 import cocoapods.Google_Mobile_Ads_SDK.GADRequest
 import cocoapods.Google_Mobile_Ads_SDK.GADRewardedAd
 import cocoapods.Google_Mobile_Ads_SDK.GADAdLoaderAdTypeNative
+import platform.Foundation.NSDate
+import platform.Foundation.timeIntervalSince1970
 import platform.Foundation.NSError
 import platform.UIKit.UIViewController
 import platform.darwin.NSObject
 
 private const val TAG = "IosAdManager"
+
+private fun currentTimeMs(): Long = (NSDate().timeIntervalSince1970 * 1000).toLong()
 
 class IosAdManager : AdManager {
 
@@ -29,9 +33,10 @@ class IosAdManager : AdManager {
     private var _isInitialized = false
     private val readyGate = ReadyGate()
 
-    private var preloadedInterstitial: GADInterstitialAd? = null
+    private val interstitialSlot = ExpiringAdSlot<GADInterstitialAd> { currentTimeMs() }
     private var isLoadingInterstitial = false
-    private var preloadedRewarded: GADRewardedAd? = null
+    private val rewardedSlot = ExpiringAdSlot<GADRewardedAd> { currentTimeMs() }
+    private var isLoadingRewarded = false
     private var isShowingFullScreen = false
 
     private var activeInterstitialDelegate: InterstitialDelegate? = null
@@ -129,7 +134,7 @@ class IosAdManager : AdManager {
 
     fun preloadInterstitial() {
         val adUnitId = config?.interstitialAdUnitId?.takeIf { it.isNotBlank() } ?: return
-        if (preloadedInterstitial != null || isLoadingInterstitial) return
+        if (interstitialSlot.fresh() != null || isLoadingInterstitial) return
         isLoadingInterstitial = true
         GADInterstitialAd.loadWithAdUnitID(
             adUnitID = adUnitId,
@@ -137,7 +142,7 @@ class IosAdManager : AdManager {
         ) { ad, error ->
             isLoadingInterstitial = false
             if (ad != null) {
-                preloadedInterstitial = ad
+                interstitialSlot.put(ad)
                 listener?.onAdLoaded(AdType.INTERSTITIAL)
             } else {
                 val err = error ?: return@loadWithAdUnitID
@@ -147,12 +152,15 @@ class IosAdManager : AdManager {
         }
     }
 
-    fun hasInterstitial(): Boolean = preloadedInterstitial != null
+    fun hasInterstitial(): Boolean = freshInterstitial() != null
+
+    private fun freshInterstitial(): GADInterstitialAd? =
+        interstitialSlot.fresh { preloadInterstitial() }
 
     // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
     override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
         if (isShowingFullScreen) return false
-        val ad = preloadedInterstitial ?: run {
+        val ad = freshInterstitial() ?: run {
             // A failed preload (e.g. offline at launch) is otherwise never retried in-process
             if (_isInitialized) preloadInterstitial()
             return false
@@ -164,14 +172,14 @@ class IosAdManager : AdManager {
             onDismissed = {
                 isShowingFullScreen = false
                 activeInterstitialDelegate = null
-                preloadedInterstitial = null
+                interstitialSlot.clear()
                 preloadInterstitial()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
                 isShowingFullScreen = false
                 activeInterstitialDelegate = null
-                preloadedInterstitial = null
+                interstitialSlot.clear()
                 preloadInterstitial()
                 listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
@@ -188,12 +196,15 @@ class IosAdManager : AdManager {
 
     fun preloadRewarded() {
         val adUnitId = config?.rewardedAdUnitId?.takeIf { it.isNotBlank() } ?: return
+        if (rewardedSlot.fresh() != null || isLoadingRewarded) return
+        isLoadingRewarded = true
         GADRewardedAd.loadWithAdUnitID(
             adUnitID = adUnitId,
             request = GADRequest()
         ) { ad, error ->
+            isLoadingRewarded = false
             if (ad != null) {
-                preloadedRewarded = ad
+                rewardedSlot.put(ad)
                 listener?.onAdLoaded(AdType.REWARDED)
             } else {
                 val err = error ?: return@loadWithAdUnitID
@@ -203,7 +214,10 @@ class IosAdManager : AdManager {
         }
     }
 
-    fun hasRewarded(): Boolean = preloadedRewarded != null
+    fun hasRewarded(): Boolean = freshRewarded() != null
+
+    private fun freshRewarded(): GADRewardedAd? =
+        rewardedSlot.fresh { preloadRewarded() }
 
     // PlatformContext = UIViewController on iOS, so this satisfies both direct API and interface override.
     override fun showRewarded(
@@ -212,7 +226,10 @@ class IosAdManager : AdManager {
         onDismissed: (() -> Unit)?
     ): Boolean {
         if (isShowingFullScreen) return false
-        val ad = preloadedRewarded ?: return false
+        val ad = freshRewarded() ?: run {
+            if (_isInitialized) preloadRewarded()
+            return false
+        }
         isShowingFullScreen = true
         val delegate = RewardedDelegate(
             onShown = { listener?.onAdShown(AdType.REWARDED) },
@@ -220,15 +237,18 @@ class IosAdManager : AdManager {
             onDismissed = {
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
-                preloadedRewarded = null
+                rewardedSlot.clear()
                 preloadRewarded()
                 onDismissed?.invoke()
             },
             onFailed = { error ->
                 isShowingFullScreen = false
                 activeRewardedDelegate = null
+                rewardedSlot.clear()
+                preloadRewarded()
                 listener?.onAdFailedToShow(error)
                 listener?.onAdFailed(error)
+                onDismissed?.invoke()
             }
         )
         activeRewardedDelegate = delegate

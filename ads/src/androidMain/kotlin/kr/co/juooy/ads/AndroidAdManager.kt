@@ -38,9 +38,12 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
     private val initialized = AtomicBoolean(false)
     private val readyGate = ReadyGate()
 
-    private var preloadedInterstitial: InterstitialAd? = null
+    private val interstitialSlot = ExpiringAdSlot<InterstitialAd> { System.currentTimeMillis() }
     private val isLoadingInterstitial = AtomicBoolean(false)
-    private var preloadedRewarded: RewardedAd? = null
+    private val rewardedSlot = ExpiringAdSlot<RewardedAd> { System.currentTimeMillis() }
+    private val isLoadingRewarded = AtomicBoolean(false)
+    // Application context from the last preload, so an expired ad can be replaced from hasInterstitial/hasRewarded
+    private var preloadContext: Context? = null
 
     override fun initialize(config: AdConfig, listener: AdEventListener?) {
         this.config = config
@@ -131,13 +134,14 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     fun preloadInterstitial(context: Context) {
         val adUnitId = config?.interstitialAdUnitId?.takeIf { it.isNotBlank() } ?: return
-        if (preloadedInterstitial != null || isLoadingInterstitial.getAndSet(true)) return
+        preloadContext = context.applicationContext
+        if (interstitialSlot.fresh() != null || isLoadingInterstitial.getAndSet(true)) return
         InterstitialAd.load(
             context, adUnitId, AdRequest.Builder().build(),
             object : InterstitialAdLoadCallback() {
                 override fun onAdLoaded(ad: InterstitialAd) {
                     isLoadingInterstitial.set(false)
-                    preloadedInterstitial = ad
+                    interstitialSlot.put(ad)
                     listener?.onAdLoaded(AdType.INTERSTITIAL)
                 }
 
@@ -150,12 +154,15 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         )
     }
 
-    fun hasInterstitial(): Boolean = preloadedInterstitial != null
+    fun hasInterstitial(): Boolean = freshInterstitial() != null
+
+    private fun freshInterstitial(): InterstitialAd? =
+        interstitialSlot.fresh { preloadContext?.let(::preloadInterstitial) }
 
     // PlatformContext = Activity on Android, so this satisfies both the direct API and the interface override.
     override fun showInterstitial(context: PlatformContext, onDismissed: (() -> Unit)?): Boolean {
         if (context.isFinishing || context.isDestroyed) return false
-        val ad = preloadedInterstitial ?: run {
+        val ad = freshInterstitial() ?: run {
             // A failed preload (e.g. offline at launch) is otherwise never retried in-process
             if (initialized.get()) preloadInterstitial(context.applicationContext)
             return false
@@ -171,13 +178,13 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             }
 
             override fun onAdDismissedFullScreenContent() {
-                preloadedInterstitial = null
+                interstitialSlot.clear()
                 preloadInterstitial(appContext)
                 onDismissed?.invoke()
             }
 
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
-                preloadedInterstitial = null
+                interstitialSlot.clear()
                 preloadInterstitial(appContext)
                 val adError = kr.co.juooy.ads.AdError(error.code, error.message, AdType.INTERSTITIAL)
                 listener?.onAdFailedToShow(adError)
@@ -193,15 +200,19 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
 
     fun preloadRewarded(context: Context) {
         val adUnitId = config?.rewardedAdUnitId?.takeIf { it.isNotBlank() } ?: return
+        preloadContext = context.applicationContext
+        if (rewardedSlot.fresh() != null || isLoadingRewarded.getAndSet(true)) return
         RewardedAd.load(
             context, adUnitId, AdRequest.Builder().build(),
             object : RewardedAdLoadCallback() {
                 override fun onAdLoaded(ad: RewardedAd) {
-                    preloadedRewarded = ad
+                    isLoadingRewarded.set(false)
+                    rewardedSlot.put(ad)
                     listener?.onAdLoaded(AdType.REWARDED)
                 }
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
+                    isLoadingRewarded.set(false)
                     Log.e(TAG, "Rewarded ad failed to load: ${error.message}")
                     listener?.onAdFailed(kr.co.juooy.ads.AdError(error.code, error.message, AdType.REWARDED))
                 }
@@ -209,7 +220,10 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         )
     }
 
-    fun hasRewarded(): Boolean = preloadedRewarded != null
+    fun hasRewarded(): Boolean = freshRewarded() != null
+
+    private fun freshRewarded(): RewardedAd? =
+        rewardedSlot.fresh { preloadContext?.let(::preloadRewarded) }
 
     // PlatformContext = Activity on Android, so this satisfies both the direct API and the interface override.
     override fun showRewarded(
@@ -218,7 +232,10 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
         onDismissed: (() -> Unit)?
     ): Boolean {
         if (context.isFinishing || context.isDestroyed) return false
-        val ad = preloadedRewarded ?: return false
+        val ad = freshRewarded() ?: run {
+            if (initialized.get()) preloadRewarded(context.applicationContext)
+            return false
+        }
         val appContext = context.applicationContext
         ad.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdShowedFullScreenContent() {
@@ -230,12 +247,14 @@ class AndroidAdManager : kr.co.juooy.ads.AdManager {
             }
 
             override fun onAdDismissedFullScreenContent() {
-                preloadedRewarded = null
+                rewardedSlot.clear()
                 preloadRewarded(appContext)
                 onDismissed?.invoke()
             }
 
             override fun onAdFailedToShowFullScreenContent(error: AdError) {
+                rewardedSlot.clear()
+                preloadRewarded(appContext)
                 val adError = kr.co.juooy.ads.AdError(error.code, error.message, AdType.REWARDED)
                 listener?.onAdFailedToShow(adError)
                 listener?.onAdFailed(adError)
