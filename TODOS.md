@@ -17,6 +17,6 @@
   - 확인: Ad Inspector 단일 소스 테스트 「Pangle KR SDK (Bidding)」, 4주 뒤 입찰 요청·참여율·낙찰률
 - [ ] **Pangle DSP 파트너 추가** — AdMob → 개인정보 보호 및 메시지 → 유럽 규정·미국 주 규정의 광고 파트너 목록에 「Pangle DSP」 체크 (계정 관리 권한 필요)
 - [ ] **Play 데이터 보안 양식** — Pangle SDK(+ TikTok Business SDK)가 수집하는 항목을 앱별로 반영: Rosary 2종, CatholicPrayForTheDead, MIC, 그 외 출시·출시 예정 앱. 개인정보처리방침에 제3자(Pangle/ByteDance) 추가
-  - ⚠️ **Whisky(`com.uwual.cask68`)**: 사용자 소유 앱인지 확인 필요. 아니라면 Pangle 포함이 그 앱의 데이터 보안 신고를 바꾸므로, 소유자와 합의하거나 Whisky에서 `exclude(group = "com.google.ads.mediation", module = "pangle")`로 뺀다
+  - ⚠️ **Whisky(`com.uwual.cask68`, 사용자 소유·팀 공동 개발)**: 광고를 쓰지 않는데 JuooyLibrary(`implementation 'kr.co.juooy:ads'`) 경유로 AdMob·Pangle SDK가 포함된다. 증상과 선택지는 Whisky `TODOS.md` 「쓰지 않는 광고 SDK가 앱에 포함됨」 (팀 결정 대기)
 - [ ] **App Store 개인정보 라벨** — Rosary iOS 출시 제출 때 Pangle 수집 항목(Pangle 문서 「App privacy details on the App Store」) 반영. WhatsYourName iOS는 Pangle 미포함
 
